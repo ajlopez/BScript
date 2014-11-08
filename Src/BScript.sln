@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BScript", "BScript\BScript.csproj", "{E4605941-5F86-4DB7-AB8E-771667F39554}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BScript.Tests", "BScript.Tests\BScript.Tests.csproj", "{CF33155D-4AEF-4F4D-BF0A-A6BEC80B9267}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{49866278-3B6E-4664-8CED-DEA4C9C47581}"
+	ProjectSection(SolutionItems) = preProject
+		BScript.vsmdi = BScript.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = BScript.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4605941-5F86-4DB7-AB8E-771667F39554}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4605941-5F86-4DB7-AB8E-771667F39554}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4605941-5F86-4DB7-AB8E-771667F39554}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4605941-5F86-4DB7-AB8E-771667F39554}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF33155D-4AEF-4F4D-BF0A-A6BEC80B9267}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF33155D-4AEF-4F4D-BF0A-A6BEC80B9267}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF33155D-4AEF-4F4D-BF0A-A6BEC80B9267}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF33155D-4AEF-4F4D-BF0A-A6BEC80B9267}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
