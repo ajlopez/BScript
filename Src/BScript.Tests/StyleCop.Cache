@@ -1,0 +1,15 @@
+<stylecopresultscache>
+  <version>10</version>
+  <project key="1363203632">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="AssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/08/2014 06:32:19</timestamp>
+      <milliseconds>426</milliseconds>
+    </settings>
+    <timestamp>11/08/2014 06:31:23</timestamp>
+    <milliseconds>499</milliseconds>
+    <violations />
+  </sourcecode>
+</stylecopresultscache>
