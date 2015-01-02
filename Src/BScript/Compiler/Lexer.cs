@@ -28,12 +28,18 @@
 
             var value = string.Empty;
 
+            if (char.IsDigit(this.text[this.position]))
+            {
+                while (this.position < this.length && char.IsDigit(this.text[this.position]))
+                    value += this.text[this.position++];
+
+                return new Token(TokenType.Integer, value);
+            }
+
             while (this.position < this.length && !char.IsWhiteSpace(this.text[this.position]))
                 value += this.text[this.position++];
 
-            var token = new Token(TokenType.Name, value);
-
-            return token;
+            return new Token(TokenType.Name, value);
         }
     }
 }
