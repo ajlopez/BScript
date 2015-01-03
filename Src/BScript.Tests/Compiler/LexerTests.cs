@@ -95,5 +95,47 @@
 
             Assert.IsNull(lexer.NextToken());
         }
+
+        [TestMethod]
+        public void GetEndOfLineFromNewLine()
+        {
+            Lexer lexer = new Lexer("\n");
+
+            var token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.EndOfLine, token.Type);
+            Assert.AreEqual("\n", token.Value);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void GetEndOfLineFromCarriageReturn()
+        {
+            Lexer lexer = new Lexer("\r");
+
+            var token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.EndOfLine, token.Type);
+            Assert.AreEqual("\r", token.Value);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void GetEndOfLineFromCarriageReturnLineFeed()
+        {
+            Lexer lexer = new Lexer("\r\n");
+
+            var token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.EndOfLine, token.Type);
+            Assert.AreEqual("\r\n", token.Value);
+
+            Assert.IsNull(lexer.NextToken());
+        }
     }
 }

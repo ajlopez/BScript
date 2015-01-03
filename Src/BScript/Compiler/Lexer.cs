@@ -20,15 +20,42 @@
 
         public Token NextToken()
         {
-            while (this.position < this.length && char.IsWhiteSpace(this.text[this.position]))
+            char ch = ' ';
+
+            while (this.position < this.length) {
+                ch = this.text[this.position];
+
+                if (ch == '\r' || ch == '\n' || !char.IsWhiteSpace(ch))
+                    break;
+
                 this.position++;
+            }
 
             if (this.position >= this.length)
                 return null;
 
             var value = string.Empty;
 
-            if (char.IsDigit(this.text[this.position]))
+            if (ch == '\n')
+            {
+                this.position++;
+                return new Token(TokenType.EndOfLine, "\n");
+            }
+
+            if (ch == '\r')
+            {
+                this.position++;
+
+                if (this.position < this.length && this.text[this.position] == '\n')
+                {
+                    this.position++;
+                    return new Token(TokenType.EndOfLine, "\r\n");
+                }
+
+                return new Token(TokenType.EndOfLine, "\r");
+            }
+
+            if (char.IsDigit(ch))
             {
                 while (this.position < this.length && char.IsDigit(this.text[this.position]))
                     value += this.text[this.position++];
