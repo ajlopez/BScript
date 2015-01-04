@@ -9,6 +9,7 @@
     {
         Name,
         Integer,
+        String,
         EndOfLine
     }
 }

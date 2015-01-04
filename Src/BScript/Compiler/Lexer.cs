@@ -55,6 +55,19 @@
                 return new Token(TokenType.EndOfLine, "\r");
             }
 
+            if (ch == '"')
+            {
+                this.position++;
+
+                while (this.position < this.length && this.text[this.position] != '"')
+                    value += this.text[position++];
+
+                if (this.position < this.length)
+                    this.position++;
+
+                return new Token(TokenType.String, value);
+            }
+
             if (char.IsDigit(ch))
             {
                 while (this.position < this.length && char.IsDigit(this.text[this.position]))
