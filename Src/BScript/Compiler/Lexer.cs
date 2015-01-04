@@ -34,8 +34,6 @@
             if (this.position >= this.length)
                 return null;
 
-            var value = string.Empty;
-
             if (ch == '\n')
             {
                 this.position++;
@@ -56,30 +54,47 @@
             }
 
             if (ch == '"')
-            {
-                this.position++;
-
-                while (this.position < this.length && this.text[this.position] != '"')
-                    value += this.text[position++];
-
-                if (this.position < this.length)
-                    this.position++;
-
-                return new Token(TokenType.String, value);
-            }
+                return this.NextString();
 
             if (char.IsDigit(ch))
-            {
-                while (this.position < this.length && char.IsDigit(this.text[this.position]))
-                    value += this.text[this.position++];
+                return this.NextInteger();
 
-                return new Token(TokenType.Integer, value);
-            }
+            return NextName();
+        }
+
+        private Token NextName()
+        {
+            string value = string.Empty;
 
             while (this.position < this.length && !char.IsWhiteSpace(this.text[this.position]))
                 value += this.text[this.position++];
 
             return new Token(TokenType.Name, value);
+        }
+
+        private Token NextInteger()
+        {
+            string value = string.Empty;
+
+            while (this.position < this.length && char.IsDigit(this.text[this.position]))
+                value += this.text[this.position++];
+
+            return new Token(TokenType.Integer, value);
+        }
+
+        private Token NextString()
+        {
+            string value = string.Empty;
+
+            this.position++;
+
+            while (this.position < this.length && this.text[this.position] != '"')
+                value += this.text[position++];
+
+            if (this.position < this.length)
+                this.position++;
+
+            return new Token(TokenType.String, value);
         }
     }
 }
