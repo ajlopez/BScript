@@ -1,8 +1,5 @@
 <stylecopresultscache>
   <version>10</version>
-  <project key="1363203632">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="AssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>11/08/2014 06:32:19</timestamp>
@@ -10,6 +7,27 @@
     </settings>
     <timestamp>11/08/2014 06:31:23</timestamp>
     <milliseconds>499</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="1363203632">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="LexerTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/08/2014 06:32:19</timestamp>
+      <milliseconds>426</milliseconds>
+    </settings>
+    <timestamp>01/06/2015 05:25:56</timestamp>
+    <milliseconds>193</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ConstantExpressionTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/08/2014 06:32:19</timestamp>
+      <milliseconds>426</milliseconds>
+    </settings>
+    <timestamp>01/06/2015 05:25:56</timestamp>
+    <milliseconds>208</milliseconds>
     <violations />
   </sourcecode>
 </stylecopresultscache>

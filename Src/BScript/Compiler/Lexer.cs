@@ -22,7 +22,8 @@
         {
             char ch = ' ';
 
-            while (this.position < this.length) {
+            while (this.position < this.length) 
+            {
                 ch = this.text[this.position];
 
                 if (ch == '\r' || ch == '\n' || !char.IsWhiteSpace(ch))
@@ -59,7 +60,7 @@
             if (char.IsDigit(ch))
                 return this.NextInteger();
 
-            return NextName();
+            return this.NextName();
         }
 
         private Token NextName()
@@ -78,7 +79,6 @@
 
             while (this.position < this.length && char.IsDigit(this.text[this.position]))
                 value += this.text[this.position++];
-
 
             if (this.position < this.length - 1 && this.text[this.position] == '.' && char.IsDigit(this.text[this.position + 1])) 
             {
@@ -106,7 +106,7 @@
             this.position++;
 
             while (this.position < this.length && this.text[this.position] != '"')
-                value += this.text[position++];
+                value += this.text[this.position++];
 
             if (this.position < this.length)
                 this.position++;
