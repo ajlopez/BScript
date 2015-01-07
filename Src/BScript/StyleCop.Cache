@@ -1,5 +1,8 @@
 <stylecopresultscache>
   <version>10</version>
+  <project key="-1761800211">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
   <sourcecode name="Token.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>11/08/2014 06:32:08</timestamp>
@@ -9,13 +12,13 @@
     <milliseconds>803</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="AssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+  <sourcecode name="Lexer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>11/08/2014 06:32:08</timestamp>
       <milliseconds>75</milliseconds>
     </settings>
-    <timestamp>11/08/2014 06:30:53</timestamp>
-    <milliseconds>837</milliseconds>
+    <timestamp>01/06/2015 05:25:35</timestamp>
+    <milliseconds>173</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="TokenType.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
@@ -36,16 +39,31 @@
     <milliseconds>201</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="Lexer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+  <sourcecode name="Context.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>11/08/2014 06:32:08</timestamp>
       <milliseconds>75</milliseconds>
     </settings>
-    <timestamp>01/06/2015 05:25:35</timestamp>
-    <milliseconds>173</milliseconds>
+    <timestamp>01/07/2015 05:57:22</timestamp>
+    <milliseconds>75</milliseconds>
     <violations />
   </sourcecode>
-  <project key="-1761800211">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
+  <sourcecode name="NameExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/08/2014 06:32:08</timestamp>
+      <milliseconds>75</milliseconds>
+    </settings>
+    <timestamp>01/07/2015 06:01:32</timestamp>
+    <milliseconds>958</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="AssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/08/2014 06:32:08</timestamp>
+      <milliseconds>75</milliseconds>
+    </settings>
+    <timestamp>11/08/2014 06:30:53</timestamp>
+    <milliseconds>837</milliseconds>
+    <violations />
+  </sourcecode>
 </stylecopresultscache>
