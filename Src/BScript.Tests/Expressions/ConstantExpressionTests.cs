@@ -16,7 +16,7 @@
             var expr = new ConstantExpression(42);
 
             Assert.AreEqual(42, expr.Value);
-            Assert.AreEqual(42, expr.Evaluate());
+            Assert.AreEqual(42, expr.Evaluate(null));
         }
     }
 }

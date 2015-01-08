@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Text;
 
-    public class NameExpression
+    public class NameExpression : BScript.Expressions.IExpression
     {
         private string name;
 
