@@ -10,6 +10,7 @@
         private string text;
         private int position;
         private int length;
+        private Stack<Token> tokens = new Stack<Token>();
 
         public Lexer(string text)
         {
@@ -20,6 +21,9 @@
 
         public Token NextToken()
         {
+            if (tokens.Count > 0)
+                return tokens.Pop();
+
             char ch = ' ';
 
             while (this.position < this.length) 
@@ -61,6 +65,11 @@
                 return this.NextInteger();
 
             return this.NextName();
+        }
+
+        public void PushToken(Token token)
+        {
+            this.tokens.Push(token);
         }
 
         private Token NextName()
