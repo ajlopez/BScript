@@ -39,6 +39,12 @@
             if (this.position >= this.length)
                 return null;
 
+            if (ch == '=')
+            {
+                this.position++;
+                return new Token(TokenType.Operator, "=");
+            }
+
             if (ch == '\n')
             {
                 this.position++;
@@ -76,7 +82,7 @@
         {
             string value = string.Empty;
 
-            while (this.position < this.length && !char.IsWhiteSpace(this.text[this.position]))
+            while (this.position < this.length && char.IsLetter(this.text[this.position]))
                 value += this.text[this.position++];
 
             return new Token(TokenType.Name, value);

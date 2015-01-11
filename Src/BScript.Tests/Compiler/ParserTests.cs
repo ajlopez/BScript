@@ -58,5 +58,24 @@
             Assert.IsInstanceOfType(result, typeof(NameExpression));
             Assert.AreEqual("foo", ((NameExpression)result).Name);
         }
+
+        [TestMethod]
+        public void ParseAssignment()
+        {
+            Parser parser = new Parser("foo=1");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(AssignExpression));
+
+            var aexpr = (AssignExpression)result;
+
+            Assert.IsNotNull(aexpr.Name);
+            Assert.IsNotNull(aexpr.Expression);
+            Assert.AreEqual("foo", aexpr.Name);
+            Assert.IsInstanceOfType(aexpr.Expression, typeof(ConstantExpression));
+            Assert.AreEqual(1, ((ConstantExpression)aexpr.Expression).Value);
+        }
     }
 }

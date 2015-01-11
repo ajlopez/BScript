@@ -14,7 +14,7 @@
             this.name = name;
         }
 
-        public object Name { get { return this.name; } }
+        public string Name { get { return this.name; } }
 
         public object Evaluate(Context context)
         {

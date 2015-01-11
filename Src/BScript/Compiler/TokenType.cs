@@ -11,6 +11,7 @@
         Integer,
         Real,
         String,
+        Operator,
         EndOfLine
     }
 }
