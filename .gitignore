@@ -9,3 +9,5 @@ packages
 *.nupkg
 output
 TestResults
+StyleCop.Cache
+
