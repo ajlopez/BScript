@@ -21,8 +21,8 @@
 
         public Token NextToken()
         {
-            if (tokens.Count > 0)
-                return tokens.Pop();
+            if (this.tokens.Count > 0)
+                return this.tokens.Pop();
 
             char ch = ' ';
 
