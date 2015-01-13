@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using BScript.Commands;
     using BScript.Expressions;
 
     public class Parser
@@ -13,6 +14,16 @@
         public Parser(string text)
         {
             this.lexer = new Lexer(text);
+        }
+
+        public ICommand ParseCommand()
+        {
+            var expr = this.ParseExpression();
+
+            if (expr == null)
+                return null;
+
+            return new ExpressionCommand(expr);
         }
 
         public IExpression ParseExpression()

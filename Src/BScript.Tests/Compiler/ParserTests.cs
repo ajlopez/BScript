@@ -7,6 +7,7 @@
     using BScript.Compiler;
     using BScript.Expressions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using BScript.Commands;
 
     [TestClass]
     public class ParserTests
@@ -76,6 +77,32 @@
             Assert.AreEqual("foo", aexpr.Name);
             Assert.IsInstanceOfType(aexpr.Expression, typeof(ConstantExpression));
             Assert.AreEqual(1, ((ConstantExpression)aexpr.Expression).Value);
+        }
+
+        [TestMethod]
+        public void ParseExpressionCommand()
+        {
+            Parser parser = new Parser("foo=1");
+
+            var cmd = parser.ParseCommand();
+
+            Assert.IsNotNull(cmd);
+            Assert.IsInstanceOfType(cmd, typeof(ExpressionCommand));
+
+            var expr = ((ExpressionCommand)cmd).Expression;
+
+            Assert.IsNotNull(expr);
+            Assert.IsInstanceOfType(expr, typeof(AssignExpression));
+
+            var aexpr = (AssignExpression)expr;
+
+            Assert.IsNotNull(aexpr.Name);
+            Assert.IsNotNull(aexpr.Expression);
+            Assert.AreEqual("foo", aexpr.Name);
+            Assert.IsInstanceOfType(aexpr.Expression, typeof(ConstantExpression));
+            Assert.AreEqual(1, ((ConstantExpression)aexpr.Expression).Value);
+
+            Assert.IsNull(parser.ParseCommand());
         }
     }
 }

@@ -6,7 +6,7 @@
     using System.Text;
     using BScript.Expressions;
 
-    public class ExpressionCommand
+    public class ExpressionCommand : ICommand
     {
         private IExpression expression;
 
