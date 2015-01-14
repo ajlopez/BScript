@@ -26,6 +26,8 @@
             if (expr == null)
                 return null;
 
+            this.ParseEndOfCommand();
+
             return new ExpressionCommand(expr);
         }
 
@@ -40,6 +42,16 @@
                 return new AssignExpression(((NameExpression)expr).Name, this.ParseExpression());
 
             return expr;
+        }
+
+        private void ParseEndOfCommand()
+        {
+            Token token = this.lexer.NextToken();
+
+            if (token == null || token.Type == TokenType.EndOfLine)
+                return;
+
+            throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
         }
 
         private IExpression ParseSimpleExpression()
