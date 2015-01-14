@@ -104,5 +104,31 @@
 
             Assert.IsNull(parser.ParseCommand());
         }
+
+        [TestMethod]
+        public void ParseExpressionCommandSkippingNewLines()
+        {
+            Parser parser = new Parser("\n\r\n\rfoo=1");
+
+            var cmd = parser.ParseCommand();
+
+            Assert.IsNotNull(cmd);
+            Assert.IsInstanceOfType(cmd, typeof(ExpressionCommand));
+
+            var expr = ((ExpressionCommand)cmd).Expression;
+
+            Assert.IsNotNull(expr);
+            Assert.IsInstanceOfType(expr, typeof(AssignExpression));
+
+            var aexpr = (AssignExpression)expr;
+
+            Assert.IsNotNull(aexpr.Name);
+            Assert.IsNotNull(aexpr.Expression);
+            Assert.AreEqual("foo", aexpr.Name);
+            Assert.IsInstanceOfType(aexpr.Expression, typeof(ConstantExpression));
+            Assert.AreEqual(1, ((ConstantExpression)aexpr.Expression).Value);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
     }
 }

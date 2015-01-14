@@ -18,6 +18,9 @@
 
         public ICommand ParseCommand()
         {
+            while (this.TryParseToken(TokenType.EndOfLine))
+                ;
+
             var expr = this.ParseExpression();
 
             if (expr == null)
@@ -58,6 +61,21 @@
             this.lexer.PushToken(token);
 
             return null;
+        }
+
+        private bool TryParseToken(TokenType type)
+        {
+            var token = this.lexer.NextToken();
+
+            if (token == null)
+                return false;
+
+            if (token.Type == type)
+                return true;
+
+            this.lexer.PushToken(token);
+
+            return false;
         }
 
         private bool TryParseToken(TokenType type, string value)
