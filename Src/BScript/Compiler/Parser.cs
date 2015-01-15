@@ -19,7 +19,8 @@
         public ICommand ParseCommand()
         {
             while (this.TryParseToken(TokenType.EndOfLine))
-                ;
+            {
+            }
 
             var expr = this.ParseExpression();
 

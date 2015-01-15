@@ -4,10 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using BScript.Commands;
     using BScript.Compiler;
     using BScript.Expressions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using BScript.Commands;
 
     [TestClass]
     public class ParserTests
