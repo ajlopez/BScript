@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,8 +50,10 @@
     <Compile Include="Compiler\Token.cs" />
     <Compile Include="Compiler\TokenType.cs" />
     <Compile Include="Context.cs" />
+    <Compile Include="Expressions\BinaryOperator.cs" />
     <Compile Include="Expressions\ConstantExpression.cs" />
     <Compile Include="Expressions\AssignExpression.cs" />
+    <Compile Include="Expressions\BinaryOperatorExpression.cs" />
     <Compile Include="Expressions\IExpression.cs" />
     <Compile Include="Expressions\NameExpression.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

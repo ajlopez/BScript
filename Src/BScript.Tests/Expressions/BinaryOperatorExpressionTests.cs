@@ -1,0 +1,47 @@
+﻿namespace BScript.Tests.Expressions
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using BScript.Expressions;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    [TestClass]
+    public class BinaryOperatorExpressionTests
+    {
+        [TestMethod]
+        public void CreateExpression()
+        {
+            var lexpr = new ConstantExpression(42);
+            var rexpr = new ConstantExpression(1);
+            var expr = new BinaryOperatorExpression(BinaryOperator.Add, lexpr, rexpr);
+
+            Assert.AreEqual(BinaryOperator.Add, expr.Operator);
+            Assert.IsNotNull(expr.LeftExpression);
+            Assert.AreSame(lexpr, expr.LeftExpression);
+            Assert.IsNotNull(expr.RightExpression);
+            Assert.AreSame(rexpr, expr.RightExpression);
+        }
+
+        [TestMethod]
+        public void AddIntegers()
+        {
+            var lexpr = new ConstantExpression(40);
+            var rexpr = new ConstantExpression(2);
+            var expr = new BinaryOperatorExpression(BinaryOperator.Add, lexpr, rexpr);
+
+            Assert.AreEqual(42, expr.Evaluate(null));
+        }
+
+        [TestMethod]
+        public void SubtractIntegers()
+        {
+            var lexpr = new ConstantExpression(44);
+            var rexpr = new ConstantExpression(2);
+            var expr = new BinaryOperatorExpression(BinaryOperator.Subtract, lexpr, rexpr);
+
+            Assert.AreEqual(42, expr.Evaluate(null));
+        }
+    }
+}
