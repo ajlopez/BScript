@@ -27,6 +27,12 @@
                 case BinaryOperator.Subtract:
                     this.operfn = Operators.SubtractObject;
                     break;
+                case BinaryOperator.Multiply:
+                    this.operfn = Operators.MultiplyObject;
+                    break;
+                case BinaryOperator.Divide:
+                    this.operfn = Operators.DivideObject;
+                    break;
             }
         }
 

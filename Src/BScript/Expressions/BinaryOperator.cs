@@ -8,6 +8,8 @@
     public enum BinaryOperator
     {
         Add,
-        Subtract
+        Subtract,
+        Multiply,
+        Divide
     }
 }

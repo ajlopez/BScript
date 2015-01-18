@@ -43,5 +43,25 @@
 
             Assert.AreEqual(42, expr.Evaluate(null));
         }
+
+        [TestMethod]
+        public void MultiplyIntegers()
+        {
+            var lexpr = new ConstantExpression(21);
+            var rexpr = new ConstantExpression(2);
+            var expr = new BinaryOperatorExpression(BinaryOperator.Multiply, lexpr, rexpr);
+
+            Assert.AreEqual(42, expr.Evaluate(null));
+        }
+
+        [TestMethod]
+        public void DivideIntegers()
+        {
+            var lexpr = new ConstantExpression(84);
+            var rexpr = new ConstantExpression(2);
+            var expr = new BinaryOperatorExpression(BinaryOperator.Divide, lexpr, rexpr);
+
+            Assert.AreEqual(42.0, expr.Evaluate(null));
+        }
     }
 }
