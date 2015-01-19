@@ -45,6 +45,12 @@
                 return new Token(TokenType.Operator, "=");
             }
 
+            if (ch == '+')
+            {
+                this.position++;
+                return new Token(TokenType.Operator, "+");
+            }
+
             if (ch == '\n')
             {
                 this.position++;

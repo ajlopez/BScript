@@ -39,6 +39,9 @@
             if (expr == null)
                 return null;
 
+            if (this.TryParseToken(TokenType.Operator, "+"))
+                expr = new BinaryOperatorExpression(BinaryOperator.Add, expr, this.ParseSimpleExpression());
+
             if (expr is NameExpression && this.TryParseToken(TokenType.Operator, "="))
                 return new AssignExpression(((NameExpression)expr).Name, this.ParseExpression());
 
