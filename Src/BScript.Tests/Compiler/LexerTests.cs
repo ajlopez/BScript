@@ -89,6 +89,26 @@
         }
 
         [TestMethod]
+        public void GetIntegerMinus()
+        {
+            Lexer lexer = new Lexer("1-");
+
+            var token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.Integer, token.Type);
+            Assert.AreEqual("1", token.Value);
+
+            token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.Operator, token.Type);
+            Assert.AreEqual("-", token.Value);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         public void GetName()
         {
             Lexer lexer = new Lexer("foo");

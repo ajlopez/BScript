@@ -7,10 +7,12 @@
 
     public class Lexer
     {
+        private static char[] operators = new char[] { '=', '+', '-' };
         private string text;
         private int position;
         private int length;
         private Stack<Token> tokens = new Stack<Token>();
+
 
         public Lexer(string text)
         {
@@ -39,16 +41,10 @@
             if (this.position >= this.length)
                 return null;
 
-            if (ch == '=')
+            if (operators.Contains(ch))
             {
                 this.position++;
-                return new Token(TokenType.Operator, "=");
-            }
-
-            if (ch == '+')
-            {
-                this.position++;
-                return new Token(TokenType.Operator, "+");
+                return new Token(TokenType.Operator, ch.ToString());
             }
 
             if (ch == '\n')
