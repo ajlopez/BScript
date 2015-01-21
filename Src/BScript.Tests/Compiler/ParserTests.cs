@@ -126,6 +126,29 @@
         }
 
         [TestMethod]
+        public void ParseMultiplyIntegers()
+        {
+            Parser parser = new Parser("2*3");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BinaryOperatorExpression));
+
+            var bexpr = (BinaryOperatorExpression)result;
+
+            Assert.AreEqual(BinaryOperator.Multiply, bexpr.Operator);
+            Assert.IsNotNull(bexpr.LeftExpression);
+            Assert.IsInstanceOfType(bexpr.LeftExpression, typeof(ConstantExpression));
+            Assert.AreEqual(2, ((ConstantExpression)bexpr.LeftExpression).Value);
+            Assert.IsNotNull(bexpr.RightExpression);
+            Assert.IsInstanceOfType(bexpr.RightExpression, typeof(ConstantExpression));
+            Assert.AreEqual(3, ((ConstantExpression)bexpr.RightExpression).Value);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
         public void ParseExpressionCommand()
         {
             Parser parser = new Parser("foo=1");
