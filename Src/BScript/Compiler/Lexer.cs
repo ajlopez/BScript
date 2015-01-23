@@ -13,7 +13,6 @@
         private int length;
         private Stack<Token> tokens = new Stack<Token>();
 
-
         public Lexer(string text)
         {
             this.text = text;

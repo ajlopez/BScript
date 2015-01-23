@@ -86,20 +86,7 @@
 
             var result = parser.ParseExpression();
 
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(BinaryOperatorExpression));
-
-            var bexpr = (BinaryOperatorExpression)result;
-
-            Assert.AreEqual(BinaryOperator.Add, bexpr.Operator);
-            Assert.IsNotNull(bexpr.LeftExpression);
-            Assert.IsInstanceOfType(bexpr.LeftExpression, typeof(ConstantExpression));
-            Assert.AreEqual(1, ((ConstantExpression)bexpr.LeftExpression).Value);
-            Assert.IsNotNull(bexpr.RightExpression);
-            Assert.IsInstanceOfType(bexpr.RightExpression, typeof(ConstantExpression));
-            Assert.AreEqual(2, ((ConstantExpression)bexpr.RightExpression).Value);
-
-            Assert.IsNull(parser.ParseExpression());
+            IsBinaryOperation(result, BinaryOperator.Add, 1, 2); 
         }
 
         [TestMethod]
@@ -109,20 +96,7 @@
 
             var result = parser.ParseExpression();
 
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(BinaryOperatorExpression));
-
-            var bexpr = (BinaryOperatorExpression)result;
-
-            Assert.AreEqual(BinaryOperator.Subtract, bexpr.Operator);
-            Assert.IsNotNull(bexpr.LeftExpression);
-            Assert.IsInstanceOfType(bexpr.LeftExpression, typeof(ConstantExpression));
-            Assert.AreEqual(1, ((ConstantExpression)bexpr.LeftExpression).Value);
-            Assert.IsNotNull(bexpr.RightExpression);
-            Assert.IsInstanceOfType(bexpr.RightExpression, typeof(ConstantExpression));
-            Assert.AreEqual(2, ((ConstantExpression)bexpr.RightExpression).Value);
-
-            Assert.IsNull(parser.ParseExpression());
+            IsBinaryOperation(result, BinaryOperator.Subtract, 1, 2); 
         }
 
         [TestMethod]
@@ -132,20 +106,7 @@
 
             var result = parser.ParseExpression();
 
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(BinaryOperatorExpression));
-
-            var bexpr = (BinaryOperatorExpression)result;
-
-            Assert.AreEqual(BinaryOperator.Multiply, bexpr.Operator);
-            Assert.IsNotNull(bexpr.LeftExpression);
-            Assert.IsInstanceOfType(bexpr.LeftExpression, typeof(ConstantExpression));
-            Assert.AreEqual(2, ((ConstantExpression)bexpr.LeftExpression).Value);
-            Assert.IsNotNull(bexpr.RightExpression);
-            Assert.IsInstanceOfType(bexpr.RightExpression, typeof(ConstantExpression));
-            Assert.AreEqual(3, ((ConstantExpression)bexpr.RightExpression).Value);
-
-            Assert.IsNull(parser.ParseExpression());
+            IsBinaryOperation(result, BinaryOperator.Multiply, 2, 3);
         }
 
         [TestMethod]
@@ -271,7 +232,7 @@
             }
         }
 
-        private void IsBinaryOperation(IExpression expr, BinaryOperator oper, int left, int right)
+        private static void IsBinaryOperation(IExpression expr, BinaryOperator oper, int left, int right)
         {
             Assert.IsInstanceOfType(expr, typeof(BinaryOperatorExpression));
             var bexpr = (BinaryOperatorExpression)expr;
