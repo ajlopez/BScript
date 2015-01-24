@@ -39,14 +39,22 @@
             if (expr == null)
                 return null;
 
-            if (this.TryParseToken(TokenType.Operator, "+"))
-                expr = new BinaryOperatorExpression(BinaryOperator.Add, expr, this.ParseSimpleExpression());
-            if (this.TryParseToken(TokenType.Operator, "-"))
-                expr = new BinaryOperatorExpression(BinaryOperator.Subtract, expr, this.ParseSimpleExpression());
-            if (this.TryParseToken(TokenType.Operator, "*"))
-                expr = new BinaryOperatorExpression(BinaryOperator.Multiply, expr, this.ParseSimpleExpression());
-            if (this.TryParseToken(TokenType.Operator, "/"))
-                expr = new BinaryOperatorExpression(BinaryOperator.Divide, expr, this.ParseSimpleExpression());
+            while (true)
+            {
+                var oexpr = expr;
+
+                if (this.TryParseToken(TokenType.Operator, "+"))
+                    expr = new BinaryOperatorExpression(BinaryOperator.Add, expr, this.ParseSimpleExpression());
+                if (this.TryParseToken(TokenType.Operator, "-"))
+                    expr = new BinaryOperatorExpression(BinaryOperator.Subtract, expr, this.ParseSimpleExpression());
+                if (this.TryParseToken(TokenType.Operator, "*"))
+                    expr = new BinaryOperatorExpression(BinaryOperator.Multiply, expr, this.ParseSimpleExpression());
+                if (this.TryParseToken(TokenType.Operator, "/"))
+                    expr = new BinaryOperatorExpression(BinaryOperator.Divide, expr, this.ParseSimpleExpression());
+
+                if (oexpr == expr)
+                    break;
+            }
 
             if (expr is NameExpression && this.TryParseToken(TokenType.Operator, "="))
                 return new AssignExpression(((NameExpression)expr).Name, this.ParseExpression());

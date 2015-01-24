@@ -90,6 +90,26 @@
         }
 
         [TestMethod]
+        public void ParseAddThreeIntegers()
+        {
+            Parser parser = new Parser("1+2+3");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BinaryOperatorExpression));
+
+            var bexpr = (BinaryOperatorExpression)result;
+
+            Assert.AreEqual(BinaryOperator.Add, bexpr.Operator);
+            IsBinaryOperation(bexpr.LeftExpression, BinaryOperator.Add, 1, 2);
+            Assert.IsInstanceOfType(bexpr.RightExpression, typeof(ConstantExpression));
+            Assert.AreEqual(3, ((ConstantExpression)bexpr.RightExpression).Value);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
         public void ParseSubtractIntegers()
         {
             Parser parser = new Parser("1-2");
