@@ -9,6 +9,11 @@
 
     public class Parser
     {
+        private static string[][] operators = new string[][] {
+            new string[] { "+", "-" },
+            new string[] { "*", "/" }
+        };
+
         private Lexer lexer;
 
         public Parser(string text)
@@ -34,30 +39,42 @@
 
         public IExpression ParseExpression()
         {
-            var expr = this.ParseSimpleExpression();
+            IExpression expr = this.ParseBinaryExpression(0);
+
+            if (expr is NameExpression && this.TryParseToken(TokenType.Operator, "="))
+                return new AssignExpression(((NameExpression)expr).Name, this.ParseExpression());
+
+            return expr;
+        }
+
+        private IExpression ParseBinaryExpression(int level)
+        {
+            if (level >= operators.Length)
+                return this.ParseSimpleExpression();
+
+            IExpression expr = this.ParseBinaryExpression(level + 1);
 
             if (expr == null)
                 return null;
 
-            while (true)
+            Token token = this.lexer.NextToken();
+
+            while (token != null && token.Type == TokenType.Operator && operators[level].Contains(token.Value))
             {
-                var oexpr = expr;
+                if (token.Value == "+")
+                    expr = new BinaryOperatorExpression(BinaryOperator.Add, expr, this.ParseBinaryExpression(level + 1));
+                if (token.Value == "-")
+                    expr = new BinaryOperatorExpression(BinaryOperator.Subtract, expr, this.ParseBinaryExpression(level + 1));
+                if (token.Value == "*")
+                    expr = new BinaryOperatorExpression(BinaryOperator.Multiply, expr, this.ParseBinaryExpression(level + 1));
+                if (token.Value == "/")
+                    expr = new BinaryOperatorExpression(BinaryOperator.Divide, expr, ParseBinaryExpression(level + 1));
 
-                if (this.TryParseToken(TokenType.Operator, "+"))
-                    expr = new BinaryOperatorExpression(BinaryOperator.Add, expr, this.ParseSimpleExpression());
-                if (this.TryParseToken(TokenType.Operator, "-"))
-                    expr = new BinaryOperatorExpression(BinaryOperator.Subtract, expr, this.ParseSimpleExpression());
-                if (this.TryParseToken(TokenType.Operator, "*"))
-                    expr = new BinaryOperatorExpression(BinaryOperator.Multiply, expr, this.ParseSimpleExpression());
-                if (this.TryParseToken(TokenType.Operator, "/"))
-                    expr = new BinaryOperatorExpression(BinaryOperator.Divide, expr, this.ParseSimpleExpression());
-
-                if (oexpr == expr)
-                    break;
+                token = this.lexer.NextToken();
             }
 
-            if (expr is NameExpression && this.TryParseToken(TokenType.Operator, "="))
-                return new AssignExpression(((NameExpression)expr).Name, this.ParseExpression());
+            if (token != null)
+                this.lexer.PushToken(token);
 
             return expr;
         }

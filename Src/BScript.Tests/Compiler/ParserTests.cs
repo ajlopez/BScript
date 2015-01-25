@@ -110,6 +110,26 @@
         }
 
         [TestMethod]
+        public void ParseMixPrecedenceOperationWithThreeIntegers()
+        {
+            Parser parser = new Parser("1+2*3");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BinaryOperatorExpression));
+
+            var bexpr = (BinaryOperatorExpression)result;
+
+            Assert.AreEqual(BinaryOperator.Add, bexpr.Operator);
+            IsBinaryOperation(bexpr.RightExpression, BinaryOperator.Multiply, 2, 3);
+            Assert.IsInstanceOfType(bexpr.LeftExpression, typeof(ConstantExpression));
+            Assert.AreEqual(1, ((ConstantExpression)bexpr.LeftExpression).Value);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
         public void ParseSubtractIntegers()
         {
             Parser parser = new Parser("1-2");
