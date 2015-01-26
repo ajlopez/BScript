@@ -33,6 +33,9 @@
                 case BinaryOperator.Divide:
                     this.operfn = Operators.DivideObject;
                     break;
+                case BinaryOperator.Equal:
+                    this.operfn = (l, r) => Operators.CompareObjectEqual(l, r, false);
+                    break;
             }
         }
 
