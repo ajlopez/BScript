@@ -10,6 +10,7 @@
     public class Parser
     {
         private static string[][] operators = new string[][] {
+            new string[] { "==" },
             new string[] { "+", "-" },
             new string[] { "*", "/" }
         };
@@ -61,6 +62,8 @@
 
             while (token != null && token.Type == TokenType.Operator && operators[level].Contains(token.Value))
             {
+                if (token.Value == "==")
+                    expr = new BinaryOperatorExpression(BinaryOperator.Equal, expr, this.ParseBinaryExpression(level + 1));
                 if (token.Value == "+")
                     expr = new BinaryOperatorExpression(BinaryOperator.Add, expr, this.ParseBinaryExpression(level + 1));
                 if (token.Value == "-")

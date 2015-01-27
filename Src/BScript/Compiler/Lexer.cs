@@ -40,6 +40,12 @@
             if (this.position >= this.length)
                 return null;
 
+            if (ch == '=' && this.position < this.length - 1 && this.text[this.position + 1] == '=')
+            {
+                this.position += 2;
+                return new Token(TokenType.Operator, "==");
+            }
+
             if (operators.Contains(ch))
             {
                 this.position++;

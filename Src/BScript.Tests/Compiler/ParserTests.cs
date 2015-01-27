@@ -80,6 +80,16 @@
         }
 
         [TestMethod]
+        public void ParseEqualIntegers()
+        {
+            Parser parser = new Parser("1==2");
+
+            var result = parser.ParseExpression();
+
+            IsBinaryOperation(result, BinaryOperator.Equal, 1, 2);
+        }
+
+        [TestMethod]
         public void ParseAddIntegers()
         {
             Parser parser = new Parser("1+2");
