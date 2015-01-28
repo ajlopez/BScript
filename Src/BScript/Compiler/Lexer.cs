@@ -7,7 +7,9 @@
 
     public class Lexer
     {
+        private static char[] delimiters = new char[] { '(', ')' };
         private static char[] operators = new char[] { '=', '+', '-', '*', '/' };
+
         private string text;
         private int position;
         private int length;
@@ -50,6 +52,12 @@
             {
                 this.position++;
                 return new Token(TokenType.Operator, ch.ToString());
+            }
+
+            if (delimiters.Contains(ch))
+            {
+                this.position++;
+                return new Token(TokenType.Delimiter, ch.ToString());
             }
 
             if (ch == '\n')

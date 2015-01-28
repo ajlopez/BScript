@@ -12,6 +12,7 @@
         Real,
         String,
         Operator,
+        Delimiter,
         EndOfLine
     }
 }

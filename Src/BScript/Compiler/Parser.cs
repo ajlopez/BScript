@@ -109,6 +109,13 @@
             if (token.Type == TokenType.Name)
                 return new NameExpression(token.Value);
 
+            if (token.Type == TokenType.Delimiter && token.Value == "(")
+            {
+                var expr = this.ParseExpression();
+                this.ParseToken(TokenType.Delimiter, ")");
+                return expr;
+            }
+
             this.lexer.PushToken(token);
 
             return null;
@@ -127,6 +134,14 @@
             this.lexer.PushToken(token);
 
             return false;
+        }
+
+        private void ParseToken(TokenType type, string value)
+        {
+            var token = this.lexer.NextToken();
+
+            if (token == null || token.Type != type || token.Value != value)
+                throw new ParserException(string.Format("Expected '{0}'", value));
         }
 
         private bool TryParseToken(TokenType type, string value)
