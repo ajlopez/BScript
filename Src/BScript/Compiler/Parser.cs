@@ -9,7 +9,8 @@
 
     public class Parser
     {
-        private static string[][] operators = new string[][] {
+        private static string[][] operators = new string[][]
+        {
             new string[] { "==" },
             new string[] { "+", "-" },
             new string[] { "*", "/" }
@@ -71,7 +72,7 @@
                 if (token.Value == "*")
                     expr = new BinaryOperatorExpression(BinaryOperator.Multiply, expr, this.ParseBinaryExpression(level + 1));
                 if (token.Value == "/")
-                    expr = new BinaryOperatorExpression(BinaryOperator.Divide, expr, ParseBinaryExpression(level + 1));
+                    expr = new BinaryOperatorExpression(BinaryOperator.Divide, expr, this.ParseBinaryExpression(level + 1));
 
                 token = this.lexer.NextToken();
             }
