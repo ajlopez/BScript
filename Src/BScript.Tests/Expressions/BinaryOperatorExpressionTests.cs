@@ -103,5 +103,45 @@
 
             Assert.AreEqual(false, expr.Evaluate(null));
         }
+
+        [TestMethod]
+        public void NotEqualInteger()
+        {
+            var lexpr = new ConstantExpression(42);
+            var rexpr = new ConstantExpression(42);
+            var expr = new BinaryOperatorExpression(BinaryOperator.NotEqual, lexpr, rexpr);
+
+            Assert.AreEqual(false, expr.Evaluate(null));
+        }
+
+        [TestMethod]
+        public void NotEqualIntegers()
+        {
+            var lexpr = new ConstantExpression(42);
+            var rexpr = new ConstantExpression(1);
+            var expr = new BinaryOperatorExpression(BinaryOperator.NotEqual, lexpr, rexpr);
+
+            Assert.AreEqual(true, expr.Evaluate(null));
+        }
+
+        [TestMethod]
+        public void NotEqualNulls()
+        {
+            var lexpr = new ConstantExpression(null);
+            var rexpr = new ConstantExpression(null);
+            var expr = new BinaryOperatorExpression(BinaryOperator.NotEqual, lexpr, rexpr);
+
+            Assert.AreEqual(false, expr.Evaluate(null));
+        }
+
+        [TestMethod]
+        public void NotEqualNullNotNull()
+        {
+            var lexpr = new ConstantExpression(null);
+            var rexpr = new ConstantExpression(42);
+            var expr = new BinaryOperatorExpression(BinaryOperator.NotEqual, lexpr, rexpr);
+
+            Assert.AreEqual(true, expr.Evaluate(null));
+        }
     }
 }

@@ -11,6 +11,7 @@
         Subtract,
         Multiply,
         Divide,
-        Equal
+        Equal,
+        NotEqual
     }
 }

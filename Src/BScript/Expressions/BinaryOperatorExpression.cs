@@ -36,6 +36,9 @@
                 case BinaryOperator.Equal:
                     this.operfn = (l, r) => Operators.CompareObjectEqual(l, r, false);
                     break;
+                case BinaryOperator.NotEqual:
+                    this.operfn = (l, r) => Operators.CompareObjectNotEqual(l, r, false);
+                    break;
             }
         }
 
