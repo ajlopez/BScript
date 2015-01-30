@@ -90,6 +90,16 @@
         }
 
         [TestMethod]
+        public void ParseNotEqualIntegers()
+        {
+            Parser parser = new Parser("1<>2");
+
+            var result = parser.ParseExpression();
+
+            IsBinaryOperation(result, BinaryOperator.NotEqual, 1, 2);
+        }
+
+        [TestMethod]
         public void ParseAddIntegers()
         {
             Parser parser = new Parser("1+2");

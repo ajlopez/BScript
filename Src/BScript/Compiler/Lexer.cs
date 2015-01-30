@@ -48,6 +48,12 @@
                 return new Token(TokenType.Operator, "==");
             }
 
+            if (ch == '<' && this.position < this.length - 1 && this.text[this.position + 1] == '>')
+            {
+                this.position += 2;
+                return new Token(TokenType.Operator, "<>");
+            }
+
             if (operators.Contains(ch))
             {
                 this.position++;
