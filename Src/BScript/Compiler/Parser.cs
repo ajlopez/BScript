@@ -11,7 +11,7 @@
     {
         private static string[][] operators = new string[][]
         {
-            new string[] { "==" },
+            new string[] { "==", "<>" },
             new string[] { "+", "-" },
             new string[] { "*", "/" }
         };
@@ -65,6 +65,8 @@
             {
                 if (token.Value == "==")
                     expr = new BinaryOperatorExpression(BinaryOperator.Equal, expr, this.ParseBinaryExpression(level + 1));
+                if (token.Value == "<>")
+                    expr = new BinaryOperatorExpression(BinaryOperator.NotEqual, expr, this.ParseBinaryExpression(level + 1));
                 if (token.Value == "+")
                     expr = new BinaryOperatorExpression(BinaryOperator.Add, expr, this.ParseBinaryExpression(level + 1));
                 if (token.Value == "-")
