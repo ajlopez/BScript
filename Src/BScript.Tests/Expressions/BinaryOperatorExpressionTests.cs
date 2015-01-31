@@ -143,5 +143,45 @@
 
             Assert.AreEqual(true, expr.Evaluate(null));
         }
+
+        [TestMethod]
+        public void LessInteger()
+        {
+            var lexpr = new ConstantExpression(42);
+            var rexpr = new ConstantExpression(42);
+            var expr = new BinaryOperatorExpression(BinaryOperator.Less, lexpr, rexpr);
+
+            Assert.AreEqual(false, expr.Evaluate(null));
+        }
+
+        [TestMethod]
+        public void LessIntegers()
+        {
+            var lexpr = new ConstantExpression(42);
+            var rexpr = new ConstantExpression(43);
+            var expr = new BinaryOperatorExpression(BinaryOperator.Less, lexpr, rexpr);
+
+            Assert.AreEqual(true, expr.Evaluate(null));
+        }
+
+        [TestMethod]
+        public void GreaterInteger()
+        {
+            var lexpr = new ConstantExpression(42);
+            var rexpr = new ConstantExpression(42);
+            var expr = new BinaryOperatorExpression(BinaryOperator.Greater, lexpr, rexpr);
+
+            Assert.AreEqual(false, expr.Evaluate(null));
+        }
+
+        [TestMethod]
+        public void GreaterIntegers()
+        {
+            var lexpr = new ConstantExpression(42);
+            var rexpr = new ConstantExpression(41);
+            var expr = new BinaryOperatorExpression(BinaryOperator.Greater, lexpr, rexpr);
+
+            Assert.AreEqual(true, expr.Evaluate(null));
+        }
     }
 }

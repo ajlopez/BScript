@@ -12,6 +12,8 @@
         Multiply,
         Divide,
         Equal,
-        NotEqual
+        NotEqual,
+        Less,
+        Greater
     }
 }
