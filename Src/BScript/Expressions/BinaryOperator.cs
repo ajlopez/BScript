@@ -14,6 +14,8 @@
         Equal,
         NotEqual,
         Less,
-        Greater
+        LessEqual,
+        Greater,
+        GreaterEqual
     }
 }

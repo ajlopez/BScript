@@ -45,6 +45,12 @@
                 case BinaryOperator.Greater:
                     this.operfn = (l, r) => Operators.CompareObjectGreater(l, r, false);
                     break;
+                case BinaryOperator.LessEqual:
+                    this.operfn = (l, r) => Operators.CompareObjectLessEqual(l, r, false);
+                    break;
+                case BinaryOperator.GreaterEqual:
+                    this.operfn = (l, r) => Operators.CompareObjectGreaterEqual(l, r, false);
+                    break;
             }
         }
 
