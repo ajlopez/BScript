@@ -117,6 +117,26 @@
         }
 
         [TestMethod]
+        public void GetLessEqualGreaterEqualAsOperators()
+        {
+            Lexer lexer = new Lexer("<= >=");
+
+            var token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.Operator, token.Type);
+            Assert.AreEqual("<=", token.Value);
+
+            token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.Operator, token.Type);
+            Assert.AreEqual(">=", token.Value);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         public void GetIntegerPlus()
         {
             Lexer lexer = new Lexer("1+");

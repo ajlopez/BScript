@@ -9,6 +9,7 @@
     {
         private static char[] delimiters = new char[] { '(', ')' };
         private static char[] operators = new char[] { '=', '+', '-', '*', '/', '<', '>' };
+        private static string[] operators2 = new string[] { "==", "<>", "<=", ">=" };
 
         private string text;
         private int position;
@@ -42,16 +43,15 @@
             if (this.position >= this.length)
                 return null;
 
-            if (ch == '=' && this.position < this.length - 1 && this.text[this.position + 1] == '=')
+            if (this.position < this.length - 1 && operators2.Any(op => op[0] == ch))
             {
-                this.position += 2;
-                return new Token(TokenType.Operator, "==");
-            }
+                string val = ch.ToString() + this.text[position + 1].ToString();
 
-            if (ch == '<' && this.position < this.length - 1 && this.text[this.position + 1] == '>')
-            {
-                this.position += 2;
-                return new Token(TokenType.Operator, "<>");
+                if (operators2.Contains(val))
+                {
+                    this.position += 2;
+                    return new Token(TokenType.Operator, val);
+                }
             }
 
             if (operators.Contains(ch))

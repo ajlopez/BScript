@@ -220,6 +220,26 @@
         }
 
         [TestMethod]
+        public void ParseLessEqualIntegers()
+        {
+            Parser parser = new Parser("2<=3");
+
+            var result = parser.ParseExpression();
+
+            IsBinaryOperation(result, BinaryOperator.LessEqual, 2, 3);
+        }
+
+        [TestMethod]
+        public void ParseGreaterEqualIntegers()
+        {
+            Parser parser = new Parser("2>=3");
+
+            var result = parser.ParseExpression();
+
+            IsBinaryOperation(result, BinaryOperator.GreaterEqual, 2, 3);
+        }
+
+        [TestMethod]
         public void ParseExpressionCommand()
         {
             Parser parser = new Parser("foo=1");
