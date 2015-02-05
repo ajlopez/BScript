@@ -29,6 +29,19 @@
             {
             }
 
+            var token = this.lexer.NextToken();
+
+            if (token == null)
+                return null;
+
+            if (token.Type == TokenType.Name)
+            {
+                if (token.Value == "if") 
+                    return ParseIfCommand();
+            }
+
+            this.lexer.PushToken(token);
+
             var expr = this.ParseExpression();
 
             if (expr == null)
@@ -47,6 +60,23 @@
                 return new AssignExpression(((NameExpression)expr).Name, this.ParseExpression());
 
             return expr;
+        }
+
+        private ICommand ParseIfCommand()
+        {
+            IExpression cond = this.ParseExpression();
+            this.ParseEndOfCommand();
+            IList<ICommand> cmds = new List<ICommand>();
+
+            while (!this.TryParseToken(TokenType.Name, "end"))
+                cmds.Add(this.ParseCommand());
+
+            this.ParseEndOfCommand();
+
+            if (cmds.Count == 1)
+                return new IfCommand(cond, cmds[0]);
+
+            throw new NotImplementedException();
         }
 
         private IExpression ParseBinaryExpression(int level)

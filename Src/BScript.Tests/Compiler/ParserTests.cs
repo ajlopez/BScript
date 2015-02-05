@@ -61,6 +61,27 @@
         }
 
         [TestMethod]
+        public void ParseSimpleIf()
+        {
+            Parser parser = new Parser("if a<10\n a = 20\nend\n");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IfCommand));
+
+            var ifcmd = (IfCommand)result;
+
+            Assert.IsNotNull(ifcmd.Condition);
+            Assert.IsInstanceOfType(ifcmd.Condition, typeof(BinaryOperatorExpression));
+            Assert.IsNotNull(ifcmd.ThenCommand);
+            Assert.IsInstanceOfType(ifcmd.ThenCommand, typeof(ExpressionCommand));
+            Assert.IsNull(ifcmd.ElseCommand);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseAssignment()
         {
             Parser parser = new Parser("foo=1");
