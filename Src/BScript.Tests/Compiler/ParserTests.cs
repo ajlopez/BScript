@@ -82,6 +82,26 @@
         }
 
         [TestMethod]
+        public void ParseSimpleWhile()
+        {
+            Parser parser = new Parser("while a<10\n a = 20\nend\n");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(WhileCommand));
+
+            var whcmd = (WhileCommand)result;
+
+            Assert.IsNotNull(whcmd.Condition);
+            Assert.IsInstanceOfType(whcmd.Condition, typeof(BinaryOperatorExpression));
+            Assert.IsNotNull(whcmd.Command);
+            Assert.IsInstanceOfType(whcmd.Command, typeof(ExpressionCommand));
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseAssignment()
         {
             Parser parser = new Parser("foo=1");

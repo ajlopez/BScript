@@ -38,6 +38,8 @@
             {
                 if (token.Value == "if") 
                     return ParseIfCommand();
+                if (token.Value == "while")
+                    return ParseWhileCommand();
             }
 
             this.lexer.PushToken(token);
@@ -75,6 +77,23 @@
 
             if (cmds.Count == 1)
                 return new IfCommand(cond, cmds[0]);
+
+            throw new NotImplementedException();
+        }
+
+        private ICommand ParseWhileCommand()
+        {
+            IExpression cond = this.ParseExpression();
+            this.ParseEndOfCommand();
+            IList<ICommand> cmds = new List<ICommand>();
+
+            while (!this.TryParseToken(TokenType.Name, "end"))
+                cmds.Add(this.ParseCommand());
+
+            this.ParseEndOfCommand();
+
+            if (cmds.Count == 1)
+                return new WhileCommand(cond, cmds[0]);
 
             throw new NotImplementedException();
         }
