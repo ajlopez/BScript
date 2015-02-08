@@ -82,6 +82,27 @@
         }
 
         [TestMethod]
+        public void ParseCompositeIf()
+        {
+            Parser parser = new Parser("if a<10\n a = 20\n b = 10\nend\n");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IfCommand));
+
+            var ifcmd = (IfCommand)result;
+
+            Assert.IsNotNull(ifcmd.Condition);
+            Assert.IsInstanceOfType(ifcmd.Condition, typeof(BinaryOperatorExpression));
+            Assert.IsNotNull(ifcmd.ThenCommand);
+            Assert.IsInstanceOfType(ifcmd.ThenCommand, typeof(CompositeCommand));
+            Assert.IsNull(ifcmd.ElseCommand);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseSimpleWhile()
         {
             Parser parser = new Parser("while a<10\n a = 20\nend\n");

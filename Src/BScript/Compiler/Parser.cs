@@ -78,7 +78,7 @@
             if (cmds.Count == 1)
                 return new IfCommand(cond, cmds[0]);
 
-            throw new NotImplementedException();
+            return new IfCommand(cond, new CompositeCommand(cmds));
         }
 
         private ICommand ParseWhileCommand()
