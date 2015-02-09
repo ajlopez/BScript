@@ -95,7 +95,7 @@
             if (cmds.Count == 1)
                 return new WhileCommand(cond, cmds[0]);
 
-            throw new NotImplementedException();
+            return new WhileCommand(cond, new CompositeCommand(cmds));
         }
 
         private IExpression ParseBinaryExpression(int level)
