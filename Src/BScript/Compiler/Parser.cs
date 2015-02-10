@@ -92,7 +92,7 @@
             ICommand elsecmd = null;
 
             if (thencmds.Count == 1)
-                return thencmd = thencmds[0];
+                thencmd = thencmds[0];
             else
                 thencmd = new CompositeCommand(thencmds);
 
