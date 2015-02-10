@@ -68,17 +68,38 @@
         {
             IExpression cond = this.ParseExpression();
             this.ParseEndOfCommand();
-            IList<ICommand> cmds = new List<ICommand>();
+            IList<ICommand> thencmds = new List<ICommand>();
+            IList<ICommand> elsecmds = new List<ICommand>();
+            bool inelse = false;
 
             while (!this.TryParseToken(TokenType.Name, "end"))
-                cmds.Add(this.ParseCommand());
+            {
+                if (!inelse && this.TryParseToken(TokenType.Name, "else"))
+                {
+                    inelse = true;
+                    continue;
+                }
+
+                if (inelse)
+                    elsecmds.Add(this.ParseCommand());
+                else
+                    thencmds.Add(this.ParseCommand());
+            }
 
             this.ParseEndOfCommand();
 
-            if (cmds.Count == 1)
-                return new IfCommand(cond, cmds[0]);
+            ICommand thencmd = null;
+            ICommand elsecmd = null;
 
-            return new IfCommand(cond, new CompositeCommand(cmds));
+            if (thencmds.Count == 1)
+                return thencmd = thencmds[0];
+            else
+                thencmd = new CompositeCommand(thencmds);
+
+            if (elsecmds.Count == 1)
+                elsecmd = elsecmds[0];
+
+            return new IfCommand(cond, thencmd, elsecmd);
         }
 
         private ICommand ParseWhileCommand()
