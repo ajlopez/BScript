@@ -37,9 +37,9 @@
             if (token.Type == TokenType.Name)
             {
                 if (token.Value == "if") 
-                    return ParseIfCommand();
+                    return this.ParseIfCommand();
                 if (token.Value == "while")
-                    return ParseWhileCommand();
+                    return this.ParseWhileCommand();
             }
 
             this.lexer.PushToken(token);

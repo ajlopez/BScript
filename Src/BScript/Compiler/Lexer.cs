@@ -45,7 +45,7 @@
 
             if (this.position < this.length - 1 && operators2.Any(op => op[0] == ch))
             {
-                string val = ch.ToString() + this.text[position + 1].ToString();
+                string val = ch.ToString() + this.text[this.position + 1].ToString();
 
                 if (operators2.Contains(val))
                 {
