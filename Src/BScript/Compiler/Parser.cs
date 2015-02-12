@@ -98,6 +98,8 @@
 
             if (elsecmds.Count == 1)
                 elsecmd = elsecmds[0];
+            else if (elsecmds.Count > 1)
+                elsecmd = new CompositeCommand(elsecmds);
 
             return new IfCommand(cond, thencmd, elsecmd);
         }
