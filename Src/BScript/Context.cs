@@ -13,6 +13,10 @@
         {
         }
 
+        public bool HasReturn { get; set; }
+
+        public object ReturnValue { get; set; }
+
         public object GetValue(string name)
         {
             if (this.values.ContainsKey(name))
