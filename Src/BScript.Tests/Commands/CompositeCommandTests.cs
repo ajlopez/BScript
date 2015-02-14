@@ -42,5 +42,27 @@
             Assert.AreEqual(1, context.GetValue("a"));
             Assert.AreEqual(2, context.GetValue("b"));
         }
+
+        [TestMethod]
+        public void ExecuteCompositeCommandWithReturn()
+        {
+            IExpression expr1 = new AssignExpression("a", new ConstantExpression(1));
+            ExpressionCommand cmd1 = new ExpressionCommand(expr1);
+            ICommand cmd2 = new ReturnCommand(new ConstantExpression(3));
+            IExpression expr3 = new AssignExpression("b", new ConstantExpression(2));
+            ExpressionCommand cmd3 = new ExpressionCommand(expr3);
+            IList<ICommand> cmds = new ICommand[] { cmd1, cmd2, cmd3 };
+
+            CompositeCommand cmd = new CompositeCommand(cmds);
+
+            Context context = new Context();
+
+            cmd.Execute(context);
+
+            Assert.AreEqual(1, context.GetValue("a"));
+            Assert.IsTrue(context.HasReturn);
+            Assert.AreEqual(3, context.ReturnValue);
+            Assert.IsNull(context.GetValue("b"));
+        }
     }
 }

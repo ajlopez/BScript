@@ -19,8 +19,14 @@
 
         public void Execute(Context context)
         {
+            context.HasReturn = false;
             foreach (var cmd in this.commands)
+            {
                 cmd.Execute(context);
+
+                if (context.HasReturn)
+                    return;
+            }
         }
     }
 }
