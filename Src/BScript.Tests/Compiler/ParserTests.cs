@@ -61,6 +61,42 @@
         }
 
         [TestMethod]
+        public void ParseReturn()
+        {
+            Parser parser = new Parser("return\n");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ReturnCommand));
+
+            var rtcmd = (ReturnCommand)result;
+
+            Assert.IsNull(rtcmd.Expression);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseReturnWithExpression()
+        {
+            Parser parser = new Parser("return 42\n");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ReturnCommand));
+
+            var rtcmd = (ReturnCommand)result;
+
+            Assert.IsNotNull(rtcmd.Expression);
+            Assert.IsInstanceOfType(rtcmd.Expression, typeof(ConstantExpression));
+            Assert.AreEqual(42, ((ConstantExpression)rtcmd.Expression).Value);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseSimpleIf()
         {
             Parser parser = new Parser("if a<10\n a = 20\nend\n");

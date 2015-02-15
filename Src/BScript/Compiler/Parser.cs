@@ -40,6 +40,8 @@
                     return this.ParseIfCommand();
                 if (token.Value == "while")
                     return this.ParseWhileCommand();
+                if (token.Value == "return")
+                    return this.ParseReturnCommand();
             }
 
             this.lexer.PushToken(token);
@@ -102,6 +104,18 @@
                 elsecmd = new CompositeCommand(elsecmds);
 
             return new IfCommand(cond, thencmd, elsecmd);
+        }
+
+        private ICommand ParseReturnCommand()
+        {
+            if (this.TryParseEndOfCommand())
+                return new ReturnCommand(null);
+
+            ICommand cmd = new ReturnCommand(this.ParseExpression());
+
+            this.ParseEndOfCommand();
+
+            return cmd;
         }
 
         private ICommand ParseWhileCommand()
@@ -173,6 +187,18 @@
                 return;
 
             throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
+        }
+
+        private bool TryParseEndOfCommand()
+        {
+            Token token = this.lexer.NextToken();
+
+            if (token == null || token.Type == TokenType.EndOfLine)
+                return true;
+
+            this.lexer.PushToken(token);
+
+            return false;
         }
 
         private IExpression ParseSimpleExpression()
