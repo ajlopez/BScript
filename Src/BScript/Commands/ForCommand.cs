@@ -31,7 +31,16 @@
 
         public void Execute(Context context)
         {
-            throw new NotImplementedException();
+            object from = this.fromexpr.Evaluate(context);
+            object to = this.toexpr.Evaluate(context);
+            context.SetValue(this.name, from);
+            AssignExpression increxpr = new AssignExpression(this.name, new BinaryOperatorExpression(BinaryOperator.Add, new NameExpression(this.name), new ConstantExpression(1)));
+
+            while (((IComparable)context.GetValue(this.name)).CompareTo(to) != 1)
+            {
+                this.body.Execute(context);
+                increxpr.Evaluate(context);
+            }
         }
     }
 }

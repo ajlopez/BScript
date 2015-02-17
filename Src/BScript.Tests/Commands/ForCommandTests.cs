@@ -24,5 +24,21 @@
             Assert.AreSame(toexpr, fcmd.ToExpression);
             Assert.AreSame(body, fcmd.Body);
         }
+
+        [TestMethod]
+        public void ExecuteForCommand()
+        {
+            IExpression fromexpr = new ConstantExpression(1);
+            IExpression toexpr = new ConstantExpression(4);
+            ICommand body = new ExpressionCommand(new AssignExpression("a", new BinaryOperatorExpression(BinaryOperator.Multiply, new NameExpression("a"), new NameExpression("k"))));
+            ForCommand fcmd = new ForCommand("k", fromexpr, toexpr, body);
+
+            Context context = new Context();
+            context.SetValue("a", 1);
+
+            fcmd.Execute(context);
+
+            Assert.AreEqual(24, context.GetValue("a"));
+        }
     }
 }
