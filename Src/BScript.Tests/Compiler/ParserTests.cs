@@ -97,6 +97,31 @@
         }
 
         [TestMethod]
+        public void ParseSimpleFor()
+        {
+            Parser parser = new Parser("for k = 1 to 4\n a = a + k\nend\n");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ForCommand));
+
+            var forcmd = (ForCommand)result;
+
+            Assert.AreEqual("k", forcmd.Name);
+
+            Assert.IsNotNull(forcmd.FromExpression);
+            Assert.IsInstanceOfType(forcmd.FromExpression, typeof(ConstantExpression));
+            Assert.AreEqual(1, ((ConstantExpression)forcmd.FromExpression).Value);
+
+            Assert.IsNotNull(forcmd.ToExpression);
+            Assert.IsInstanceOfType(forcmd.ToExpression, typeof(ConstantExpression));
+            Assert.AreEqual(4, ((ConstantExpression)forcmd.ToExpression).Value);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseSimpleIf()
         {
             Parser parser = new Parser("if a<10\n a = 20\nend\n");

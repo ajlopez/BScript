@@ -38,6 +38,8 @@
             {
                 if (token.Value == "if") 
                     return this.ParseIfCommand();
+                if (token.Value == "for")
+                    return this.ParseForCommand();
                 if (token.Value == "while")
                     return this.ParseWhileCommand();
                 if (token.Value == "return")
@@ -64,6 +66,31 @@
                 return new AssignExpression(((NameExpression)expr).Name, this.ParseExpression());
 
             return expr;
+        }
+
+        private ICommand ParseForCommand()
+        {
+            string name = this.ParseName();
+
+            this.ParseToken(TokenType.Operator, "=");
+
+            IExpression fromexpr = this.ParseExpression();
+
+            this.ParseToken(TokenType.Name, "to");
+
+            IExpression toexpr = this.ParseExpression();
+
+            this.ParseEndOfCommand();
+
+            IList<ICommand> bodycmds = new List<ICommand>();
+
+            while (!this.TryParseToken(TokenType.Name, "end"))
+                bodycmds.Add(this.ParseCommand());
+
+            if (bodycmds.Count == 1)
+                return new ForCommand(name, fromexpr, toexpr, bodycmds[0]);
+
+            return null;
         }
 
         private ICommand ParseIfCommand()
@@ -177,6 +204,16 @@
                 this.lexer.PushToken(token);
 
             return expr;
+        }
+
+        private string ParseName()
+        {
+            Token token = this.lexer.NextToken();
+
+            if (token != null && token.Type == TokenType.Name)
+                return token.Value;
+
+            throw new ParserException("Name expected");
         }
 
         private void ParseEndOfCommand()
