@@ -89,8 +89,8 @@
 
             if (bodycmds.Count == 1)
                 return new ForCommand(name, fromexpr, toexpr, bodycmds[0]);
-
-            return null;
+            else
+                return new ForCommand(name, fromexpr, toexpr, new CompositeCommand(bodycmds));
         }
 
         private ICommand ParseIfCommand()
