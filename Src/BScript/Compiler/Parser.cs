@@ -80,6 +80,11 @@
 
             IExpression toexpr = this.ParseExpression();
 
+            IExpression stepexpr = null;
+
+            if (this.TryParseToken(TokenType.Name, "step"))
+                stepexpr = this.ParseExpression();
+
             this.ParseEndOfCommand();
 
             IList<ICommand> bodycmds = new List<ICommand>();
@@ -88,9 +93,9 @@
                 bodycmds.Add(this.ParseCommand());
 
             if (bodycmds.Count == 1)
-                return new ForCommand(name, fromexpr, toexpr, bodycmds[0]);
+                return new ForCommand(name, fromexpr, toexpr, stepexpr, bodycmds[0]);
             else
-                return new ForCommand(name, fromexpr, toexpr, new CompositeCommand(bodycmds));
+                return new ForCommand(name, fromexpr, toexpr, stepexpr, new CompositeCommand(bodycmds));
         }
 
         private ICommand ParseIfCommand()

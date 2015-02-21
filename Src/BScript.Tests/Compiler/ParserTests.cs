@@ -146,6 +146,40 @@
             Assert.IsInstanceOfType(forcmd.ToExpression, typeof(ConstantExpression));
             Assert.AreEqual(4, ((ConstantExpression)forcmd.ToExpression).Value);
 
+            Assert.IsNull(forcmd.StepExpression);
+
+            Assert.IsNotNull(forcmd.Body);
+            Assert.IsInstanceOfType(forcmd.Body, typeof(CompositeCommand));
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseForWithStepAndCompositeCommand()
+        {
+            Parser parser = new Parser("for k = 1 to 4 step 2\n a = a + k\n b = 0\nend\n");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ForCommand));
+
+            var forcmd = (ForCommand)result;
+
+            Assert.AreEqual("k", forcmd.Name);
+
+            Assert.IsNotNull(forcmd.FromExpression);
+            Assert.IsInstanceOfType(forcmd.FromExpression, typeof(ConstantExpression));
+            Assert.AreEqual(1, ((ConstantExpression)forcmd.FromExpression).Value);
+
+            Assert.IsNotNull(forcmd.ToExpression);
+            Assert.IsInstanceOfType(forcmd.ToExpression, typeof(ConstantExpression));
+            Assert.AreEqual(4, ((ConstantExpression)forcmd.ToExpression).Value);
+
+            Assert.IsNotNull(forcmd.StepExpression);
+            Assert.IsInstanceOfType(forcmd.StepExpression, typeof(ConstantExpression));
+            Assert.AreEqual(2, ((ConstantExpression)forcmd.StepExpression).Value);
+
             Assert.IsNotNull(forcmd.Body);
             Assert.IsInstanceOfType(forcmd.Body, typeof(CompositeCommand));
 
