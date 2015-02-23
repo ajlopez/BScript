@@ -25,5 +25,15 @@
             context.SetValue("Answer", 42);
             Assert.AreEqual(42, context.GetValue("Answer"));
         }
+
+        [TestMethod]
+        public void SetParentValueAndGetFromChild()
+        {
+            Context parent = new Context();
+            Context context = new Context(parent);
+
+            parent.SetValue("a", 42);
+            Assert.AreEqual(42, context.GetValue("a"));
+        }
     }
 }
