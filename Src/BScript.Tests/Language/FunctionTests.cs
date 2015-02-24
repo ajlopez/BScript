@@ -29,7 +29,22 @@
             ICommand body = new ReturnCommand(new BinaryOperatorExpression(BinaryOperator.Add, new NameExpression("a"), new NameExpression("b")));
             Function fn = new Function(new string[] { "a", "b" }, body);
 
-            var result = fn.Evaluate(new object[] { 1, 2 });
+            var result = fn.Evaluate(null, new object[] { 1, 2 });
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result);
+        }
+
+        [TestMethod]
+        public void ExecuteFunctionUsingExternalVariable()
+        {
+            ICommand body = new ReturnCommand(new BinaryOperatorExpression(BinaryOperator.Add, new NameExpression("a"), new NameExpression("b")));
+            Function fn = new Function(new string[] { "a" }, body);
+            Context context = new Context();
+
+            context.SetValue("b", 2);
+
+            var result = fn.Evaluate(context, new object[] { 1 });
 
             Assert.IsNotNull(result);
             Assert.AreEqual(3, result);

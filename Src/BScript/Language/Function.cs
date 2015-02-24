@@ -21,9 +21,9 @@
 
         public ICommand Body { get { return this.body; } }
 
-        public object Evaluate(IList<object> values)
+        public object Evaluate(Context parent, IList<object> values)
         {
-            Context context = new Context();
+            Context context = new Context(parent);
 
             for (int k = 0; k < argnames.Count; k++)
                 context.SetValue(argnames[k], values[k]);
