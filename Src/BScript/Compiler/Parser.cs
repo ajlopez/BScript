@@ -44,6 +44,8 @@
                     return this.ParseWhileCommand();
                 if (token.Value == "return")
                     return this.ParseReturnCommand();
+                if (token.Value == "function")
+                    return this.ParseFunctionCommand();
             }
 
             this.lexer.PushToken(token);
@@ -66,6 +68,33 @@
                 return new AssignExpression(((NameExpression)expr).Name, this.ParseExpression());
 
             return expr;
+        }
+
+        private ICommand ParseFunctionCommand()
+        {
+            string name = this.ParseName();
+
+            IList<string> argnames = new List<string>();
+
+            this.ParseToken(TokenType.Delimiter, "(");
+
+            while (!this.TryParseToken(TokenType.Delimiter, ")"))
+            {
+                if (argnames.Count > 0)
+                    this.ParseToken(TokenType.Delimiter, ",");
+
+                argnames.Add(this.ParseName());
+            }
+
+            this.ParseEndOfCommand();
+            IList<ICommand> bodycmds = new List<ICommand>();
+
+            while (!this.TryParseToken(TokenType.Name, "end"))
+                bodycmds.Add(this.ParseCommand());
+
+            this.ParseEndOfCommand();
+
+            return new FunctionCommand(name, argnames, bodycmds[0]);
         }
 
         private ICommand ParseForCommand()
@@ -91,6 +120,8 @@
 
             while (!this.TryParseToken(TokenType.Name, "end"))
                 bodycmds.Add(this.ParseCommand());
+
+            this.ParseEndOfCommand();
 
             if (bodycmds.Count == 1)
                 return new ForCommand(name, fromexpr, toexpr, stepexpr, bodycmds[0]);

@@ -604,6 +604,29 @@
             }
         }
 
+        [TestMethod]
+        public void ParseFunctionCommand()
+        {
+            Parser parser = new Parser("function foo(a, b) \n return a+b\n end");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(FunctionCommand));
+
+            var fcmd = (FunctionCommand)result;
+
+            Assert.AreEqual("foo", fcmd.Name);
+            Assert.IsNotNull(fcmd.ArgumentNames);
+            Assert.AreEqual(2, fcmd.ArgumentNames.Count);
+            Assert.AreEqual("a", fcmd.ArgumentNames[0]);
+            Assert.AreEqual("b", fcmd.ArgumentNames[1]);
+            Assert.IsNotNull(fcmd.Body);
+            Assert.IsInstanceOfType(fcmd.Body, typeof(ReturnCommand));
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
         private static void IsBinaryOperation(IExpression expr, BinaryOperator oper, int left, int right)
         {
             Assert.IsInstanceOfType(expr, typeof(BinaryOperatorExpression));
