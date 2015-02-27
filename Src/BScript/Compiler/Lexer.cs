@@ -7,7 +7,7 @@
 
     public class Lexer
     {
-        private static char[] delimiters = new char[] { '(', ')' };
+        private static char[] delimiters = new char[] { '(', ')', ',' };
         private static char[] operators = new char[] { '=', '+', '-', '*', '/', '<', '>' };
         private static string[] operators2 = new string[] { "==", "<>", "<=", ">=" };
 
