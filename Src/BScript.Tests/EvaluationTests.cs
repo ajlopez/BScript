@@ -49,6 +49,15 @@
             Assert.AreEqual(3, result);
         }
 
+        [TestMethod]
+        public void EvaluateAddAndMultiplyIntegers()
+        {
+            var result = EvaluateExpression("1+2*3");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(7, result);
+        }
+
         private static object EvaluateExpression(string text, Context context = null)
         {
             var parser = new Parser(text);
