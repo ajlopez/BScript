@@ -28,11 +28,23 @@
             Assert.AreEqual("foo", result);
         }
 
-        private static object EvaluateExpression(string text)
+        [TestMethod]
+        public void EvaluateVariable()
+        {
+            var context = new Context();
+            context.SetValue("a", 42);
+
+            var result = EvaluateExpression("a", context);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(42, result);
+        }
+
+        private static object EvaluateExpression(string text, Context context = null)
         {
             var parser = new Parser(text);
             var expr = parser.ParseExpression();
-            return expr.Evaluate(null);
+            return expr.Evaluate(context);
         }
     }
 }
