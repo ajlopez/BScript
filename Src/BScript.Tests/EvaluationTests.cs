@@ -40,6 +40,15 @@
             Assert.AreEqual(42, result);
         }
 
+        [TestMethod]
+        public void EvaluateAddIntegers()
+        {
+            var result = EvaluateExpression("1+2");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result);
+        }
+
         private static object EvaluateExpression(string text, Context context = null)
         {
             var parser = new Parser(text);
