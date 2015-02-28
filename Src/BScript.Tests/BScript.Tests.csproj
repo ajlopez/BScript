@@ -55,6 +55,7 @@
     <Compile Include="Compiler\LexerTests.cs" />
     <Compile Include="Compiler\ParserTests.cs" />
     <Compile Include="ContextTests.cs" />
+    <Compile Include="EvaluationTests.cs" />
     <Compile Include="Expressions\AssignExpressionTests.cs" />
     <Compile Include="Expressions\ConstantExpressionTests.cs" />
     <Compile Include="Expressions\BinaryOperatorExpressionTests.cs" />
