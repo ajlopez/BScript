@@ -19,6 +19,15 @@
             Assert.AreEqual(42, result);
         }
 
+        [TestMethod]
+        public void EvaluateString()
+        {
+            var result = EvaluateExpression("\"foo\"");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("foo", result);
+        }
+
         private static object EvaluateExpression(string text)
         {
             var parser = new Parser(text);
