@@ -58,6 +58,15 @@
             Assert.AreEqual(7, result);
         }
 
+        [TestMethod]
+        public void EvaluateAddAndMultiplyIntegersWithParenthesis()
+        {
+            var result = EvaluateExpression("(1+2)*3");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(9, result);
+        }
+
         private static object EvaluateExpression(string text, Context context = null)
         {
             var parser = new Parser(text);
