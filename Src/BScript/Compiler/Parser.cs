@@ -94,7 +94,14 @@
 
             this.ParseEndOfCommand();
 
-            return new FunctionCommand(name, argnames, bodycmds[0]);
+            ICommand body;
+
+            if (bodycmds.Count == 1)
+                body = bodycmds[0];
+            else
+                body = new CompositeCommand(bodycmds);
+
+            return new FunctionCommand(name, argnames, body);
         }
 
         private ICommand ParseForCommand()
