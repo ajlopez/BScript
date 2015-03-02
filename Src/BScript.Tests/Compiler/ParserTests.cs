@@ -650,6 +650,21 @@
             Assert.IsNull(parser.ParseCommand());
         }
 
+        [TestMethod]
+        public void ParseCommands()
+        {
+            Parser parser = new Parser("a=1\nb=2");
+
+            var result = parser.ParseCommands();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(CompositeCommand));
+
+            var ccmd = (CompositeCommand)result;
+
+            Assert.AreEqual(2, ccmd.Commands.Count);
+        }
+
         private static void IsBinaryOperation(IExpression expr, BinaryOperator oper, int left, int right)
         {
             Assert.IsInstanceOfType(expr, typeof(BinaryOperatorExpression));

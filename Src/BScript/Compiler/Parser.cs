@@ -23,6 +23,11 @@
             this.lexer = new Lexer(text);
         }
 
+        public ICommand ParseCommands()
+        {
+            throw new NotImplementedException();
+        }
+
         public ICommand ParseCommand()
         {
             while (this.TryParseToken(TokenType.EndOfLine))
