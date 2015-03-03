@@ -25,7 +25,12 @@
 
         public ICommand ParseCommands()
         {
-            throw new NotImplementedException();
+            IList<ICommand> cmds = new List<ICommand>();
+
+            for (ICommand cmd = this.ParseCommand(); cmd != null; cmd = this.ParseCommand())
+                cmds.Add(cmd);
+
+            return new CompositeCommand(cmds);
         }
 
         public ICommand ParseCommand()
