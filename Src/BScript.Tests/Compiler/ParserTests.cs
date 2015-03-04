@@ -665,6 +665,27 @@
             Assert.AreEqual(2, ccmd.Commands.Count);
         }
 
+        [TestMethod]
+        public void ParseCommandsOneCommand()
+        {
+            Parser parser = new Parser("a=1");
+
+            var result = parser.ParseCommands();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ExpressionCommand));
+
+            var excmd = (ExpressionCommand)result;
+
+            Assert.IsInstanceOfType(excmd.Expression, typeof(AssignExpression));
+
+            var aexpr = (AssignExpression)excmd.Expression;
+
+            Assert.AreEqual("a", aexpr.Name);
+            Assert.IsInstanceOfType(aexpr.Expression, typeof(ConstantExpression));
+            Assert.AreEqual(1, ((ConstantExpression)aexpr.Expression).Value);
+        }
+
         private static void IsBinaryOperation(IExpression expr, BinaryOperator oper, int left, int right)
         {
             Assert.IsInstanceOfType(expr, typeof(BinaryOperatorExpression));

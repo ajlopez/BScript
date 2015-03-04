@@ -30,6 +30,9 @@
             for (ICommand cmd = this.ParseCommand(); cmd != null; cmd = this.ParseCommand())
                 cmds.Add(cmd);
 
+            if (cmds.Count == 1)
+                return cmds[0];
+
             return new CompositeCommand(cmds);
         }
 
