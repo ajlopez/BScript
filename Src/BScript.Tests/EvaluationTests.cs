@@ -67,11 +67,28 @@
             Assert.AreEqual(9, result);
         }
 
+        [TestMethod]
+        public void EvaluateAssignCommands()
+        {
+            Context context = new Context();
+            EvaluateCommands("a=1\nb=2", context);
+
+            Assert.AreEqual(1, context.GetValue("a"));
+            Assert.AreEqual(2, context.GetValue("b"));
+        }
+
         private static object EvaluateExpression(string text, Context context = null)
         {
             var parser = new Parser(text);
             var expr = parser.ParseExpression();
             return expr.Evaluate(context);
+        }
+
+        private static void EvaluateCommands(string text, Context context = null)
+        {
+            var parser = new Parser(text);
+            var cmds = parser.ParseCommands();
+            cmds.Execute(context);
         }
     }
 }
