@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using BScript.Expressions;
+    using BScript.Language;
 
     public class FunctionCommand : ICommand
     {
@@ -27,7 +28,8 @@
 
         public void Execute(Context context)
         {
-            throw new NotImplementedException();
+            Function func = new Function(this.argnames, this.body);
+            context.SetValue(this.name, func);
         }
     }
 }

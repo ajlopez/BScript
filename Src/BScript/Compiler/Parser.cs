@@ -308,7 +308,22 @@
                 return new ConstantExpression(int.Parse(token.Value));
 
             if (token.Type == TokenType.Name)
-                return new NameExpression(token.Value);
+            {
+                if (!this.TryParseToken(TokenType.Delimiter, "("))
+                    return new NameExpression(token.Value);
+
+                IList<IExpression> argexprs = new List<IExpression>();
+
+                while (!this.TryParseToken(TokenType.Delimiter, ")"))
+                {
+                    if (argexprs.Count > 0)
+                        this.ParseToken(TokenType.Delimiter, ",");
+
+                    argexprs.Add(this.ParseExpression());
+                }
+
+                return new CallExpression(token.Value, argexprs);
+            }
 
             if (token.Type == TokenType.Delimiter && token.Value == "(")
             {

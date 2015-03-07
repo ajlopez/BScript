@@ -83,7 +83,7 @@
             Context context = new Context();
             EvaluateCommands("function foo(a)\n return a+1\nend\n a=foo(1)", context);
 
-            Assert.AreEqual(1, context.GetValue("a"));
+            Assert.AreEqual(2, context.GetValue("a"));
         }
 
         private static object EvaluateExpression(string text, Context context = null)
