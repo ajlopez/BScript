@@ -86,6 +86,15 @@
             Assert.AreEqual(2, context.GetValue("a"));
         }
 
+        [TestMethod]
+        public void EvaluateFunctionCallUsingFreeVariable()
+        {
+            Context context = new Context();
+            EvaluateCommands("function foo(a)\n return a+b\nend\n b=2\na=foo(1)", context);
+
+            Assert.AreEqual(3, context.GetValue("a"));
+        }
+
         private static object EvaluateExpression(string text, Context context = null)
         {
             var parser = new Parser(text);
