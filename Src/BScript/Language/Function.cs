@@ -25,8 +25,8 @@
         {
             Context context = new Context(parent);
 
-            for (int k = 0; k < argnames.Count; k++)
-                context.SetValue(argnames[k], values[k]);
+            for (int k = 0; k < this.argnames.Count; k++)
+                context.SetValue(this.argnames[k], values[k]);
 
             this.body.Execute(context);
 

@@ -6,8 +6,8 @@
     using System.Text;
     using BScript.Commands;
     using BScript.Expressions;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using BScript.Language;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class FunctionCommandTests
