@@ -155,6 +155,38 @@
         }
 
         [TestMethod]
+        public void ParseForExpectName()
+        {
+            Parser parser = new Parser("for 1 = 1 to 4\n a = a + k\n b = 0\nend\n");
+
+            try
+            {
+                var result = parser.ParseCommand();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(ParserException));
+                Assert.AreEqual("Name expected", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void ParseForExpectEqual()
+        {
+            Parser parser = new Parser("for k 1 to 4\n a = a + k\n b = 0\nend\n");
+
+            try
+            {
+                var result = parser.ParseCommand();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(ParserException));
+                Assert.AreEqual("Expected '='", ex.Message);
+            }
+        }
+
+        [TestMethod]
         public void ParseForWithStepAndCompositeCommand()
         {
             Parser parser = new Parser("for k = 1 to 4 step 2\n a = a + k\n b = 0\nend\n");
@@ -684,6 +716,39 @@
             Assert.AreEqual("a", aexpr.Name);
             Assert.IsInstanceOfType(aexpr.Expression, typeof(ConstantExpression));
             Assert.AreEqual(1, ((ConstantExpression)aexpr.Expression).Value);
+        }
+
+        [TestMethod]
+        public void ParseCall()
+        {
+            Parser parser = new Parser("foo(1, 2)");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(CallExpression));
+
+            var cexpr = (CallExpression)result;
+
+            Assert.AreEqual("foo", cexpr.Name);
+            Assert.IsNotNull(cexpr.ArgumentExpressions);
+            Assert.AreEqual(2, cexpr.ArgumentExpressions.Count);
+        }
+
+        [TestMethod]
+        public void ParseExpressionUnexpectedToken()
+        {
+            Parser parser = new Parser("= 1");
+
+            try
+            {
+                var result = parser.ParseExpression();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(ParserException));
+                Assert.AreEqual("Unexpected '='", ex.Message);
+            }
         }
 
         private static void IsBinaryOperation(IExpression expr, BinaryOperator oper, int left, int right)

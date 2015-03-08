@@ -65,9 +65,6 @@
 
             var expr = this.ParseExpression();
 
-            if (expr == null)
-                return null;
-
             this.ParseEndOfCommand();
 
             return new ExpressionCommand(expr);
@@ -332,9 +329,7 @@
                 return expr;
             }
 
-            this.lexer.PushToken(token);
-
-            return null;
+            throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
         }
 
         private bool TryParseToken(TokenType type)
