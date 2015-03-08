@@ -7,6 +7,7 @@
     using BScript.Commands;
     using BScript.Expressions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using BScript.Language;
 
     [TestClass]
     public class FunctionCommandTests
@@ -23,6 +24,23 @@
             Assert.AreEqual(name, fcmd.Name);
             Assert.AreSame(argnames, fcmd.ArgumentNames);
             Assert.AreSame(body, fcmd.Body);
+        }
+
+        [TestMethod]
+        public void EvaluateFunctionCommand()
+        {
+            string name = "foo";
+            IList<string> argnames = new string[] { "a", "b" };
+            ICommand body = new ExpressionCommand(new ConstantExpression(2));
+            Context context = new Context();
+
+            FunctionCommand fcmd = new FunctionCommand(name, argnames, body);
+
+            fcmd.Execute(context);
+
+            var result = context.GetValue("foo");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Function));
         }
     }
 }
