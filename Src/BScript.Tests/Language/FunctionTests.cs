@@ -24,7 +24,7 @@
         }
 
         [TestMethod]
-        public void ExecuteFunction()
+        public void EvaluateFunction()
         {
             ICommand body = new ReturnCommand(new BinaryOperatorExpression(BinaryOperator.Add, new NameExpression("a"), new NameExpression("b")));
             Function fn = new Function(new string[] { "a", "b" }, body);
@@ -36,7 +36,18 @@
         }
 
         [TestMethod]
-        public void ExecuteFunctionUsingExternalVariable()
+        public void EvaluateFunctionWithoutReturn()
+        {
+            ICommand body = new ExpressionCommand(new BinaryOperatorExpression(BinaryOperator.Add, new NameExpression("a"), new NameExpression("b")));
+            Function fn = new Function(new string[] { "a", "b" }, body);
+
+            var result = fn.Evaluate(null, new object[] { 1, 2 });
+
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void EvaluateFunctionUsingExternalVariable()
         {
             ICommand body = new ReturnCommand(new BinaryOperatorExpression(BinaryOperator.Add, new NameExpression("a"), new NameExpression("b")));
             Function fn = new Function(new string[] { "a" }, body);
