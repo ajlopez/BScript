@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using BScript.Commands;
+    using BScript.Compiler;
 
     public class Machine
     {
@@ -15,5 +17,12 @@
         }
 
         public Context RootContext { get { return this.context; } }
+
+        public void Execute(string code)
+        {
+            Parser parser = new Parser(code);
+            ICommand cmd = parser.ParseCommand();
+            cmd.Execute(this.context);
+        }
     }
 }
