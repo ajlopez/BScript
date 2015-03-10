@@ -24,5 +24,16 @@
             Assert.AreEqual(1, machine.RootContext.GetValue("a"));
             Assert.IsNull(machine.RootContext.GetValue("b"));
         }
+
+        [TestMethod]
+        public void ExecuteCodeSetVariables()
+        {
+            var machine = new Machine();
+
+            machine.Execute("a=1\nb=2");
+
+            Assert.AreEqual(1, machine.RootContext.GetValue("a"));
+            Assert.AreEqual(2, machine.RootContext.GetValue("b"));
+        }
     }
 }

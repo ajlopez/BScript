@@ -21,7 +21,7 @@
         public void Execute(string code)
         {
             Parser parser = new Parser(code);
-            ICommand cmd = parser.ParseCommand();
+            ICommand cmd = parser.ParseCommands();
             cmd.Execute(this.context);
         }
     }
