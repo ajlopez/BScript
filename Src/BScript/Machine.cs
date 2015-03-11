@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using BScript.Commands;
@@ -23,6 +24,12 @@
             Parser parser = new Parser(code);
             ICommand cmd = parser.ParseCommands();
             cmd.Execute(this.context);
+        }
+
+        public void ExecuteFile(string filename)
+        {
+            var code = File.ReadAllText(filename);
+            this.Execute(code);
         }
     }
 }

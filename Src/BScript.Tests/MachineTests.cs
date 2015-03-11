@@ -4,6 +4,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
+    [DeploymentItem("Files", "Files")]
     public class MachineTests
     {
         [TestMethod]
@@ -31,6 +32,17 @@
             var machine = new Machine();
 
             machine.Execute("a=1\nb=2");
+
+            Assert.AreEqual(1, machine.RootContext.GetValue("a"));
+            Assert.AreEqual(2, machine.RootContext.GetValue("b"));
+        }
+
+        [TestMethod]
+        public void ExecuteFileSetVariables()
+        {
+            var machine = new Machine();
+
+            machine.ExecuteFile("Files\\SetVariables.txt");
 
             Assert.AreEqual(1, machine.RootContext.GetValue("a"));
             Assert.AreEqual(2, machine.RootContext.GetValue("b"));
