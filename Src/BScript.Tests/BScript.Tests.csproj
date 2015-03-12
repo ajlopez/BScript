@@ -72,6 +72,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Files\InvokeFunction.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Files\SetVariables.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
