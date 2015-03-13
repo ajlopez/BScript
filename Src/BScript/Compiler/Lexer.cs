@@ -103,7 +103,7 @@
         {
             string value = string.Empty;
 
-            while (this.position < this.length && char.IsLetter(this.text[this.position]))
+            while (this.position < this.length && char.IsLetterOrDigit(this.text[this.position]))
                 value += this.text[this.position++];
 
             return new Token(TokenType.Name, value);

@@ -58,5 +58,18 @@
             Assert.AreEqual(1, machine.RootContext.GetValue("a"));
             Assert.AreEqual(2, machine.RootContext.GetValue("b"));
         }
+
+        [TestMethod]
+        public void ExecuteFileFactorial()
+        {
+            var machine = new Machine();
+
+            machine.ExecuteFile("Files\\Factorial.txt");
+
+            Assert.AreEqual(1, machine.RootContext.GetValue("f1"));
+            Assert.AreEqual(2, machine.RootContext.GetValue("f2"));
+            Assert.AreEqual(6, machine.RootContext.GetValue("f3"));
+            Assert.AreEqual(24, machine.RootContext.GetValue("f4"));
+        }
     }
 }

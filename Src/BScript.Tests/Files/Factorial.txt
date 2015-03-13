@@ -1,0 +1,12 @@
+﻿function factorial(n)
+	if n <= 1
+		return 1
+	end
+
+	return n * factorial(n)
+end
+
+f1 = factorial(1)
+f2 = factorial(2)
+f3 = factorial(3)
+f4 = factorial(4)
