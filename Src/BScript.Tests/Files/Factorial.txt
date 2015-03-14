@@ -3,7 +3,7 @@
 		return 1
 	end
 
-	return n * factorial(n)
+	return n * factorial(n-1)
 end
 
 f1 = factorial(1)
