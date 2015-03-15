@@ -60,6 +60,17 @@
         }
 
         [TestMethod]
+        public void ExecuteFileInvokeFunctionBeforeDefinition()
+        {
+            var machine = new Machine();
+
+            machine.ExecuteFile("Files\\InvokeFunctionBeforeDefinition.txt");
+
+            Assert.AreEqual(1, machine.RootContext.GetValue("a"));
+            Assert.AreEqual(2, machine.RootContext.GetValue("b"));
+        }
+
+        [TestMethod]
         public void ExecuteFileFactorial()
         {
             var machine = new Machine();

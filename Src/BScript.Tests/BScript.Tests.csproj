@@ -72,6 +72,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Files\InvokeFunctionBeforeDefinition.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Files\Factorial.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

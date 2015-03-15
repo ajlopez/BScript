@@ -1,0 +1,7 @@
+﻿
+a = foo(0)
+b = foo(1)
+
+function foo(a)
+	return a + 1
+end

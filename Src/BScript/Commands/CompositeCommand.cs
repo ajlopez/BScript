@@ -20,7 +20,11 @@
         public void Execute(Context context)
         {
             context.HasReturn = false;
-            foreach (var cmd in this.commands)
+
+            foreach (var cmd in this.commands.Where(cmd => cmd is FunctionCommand))
+                cmd.Execute(context);
+
+            foreach (var cmd in this.commands.Where(cmd => !(cmd is FunctionCommand)))
             {
                 cmd.Execute(context);
 
