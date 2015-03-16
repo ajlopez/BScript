@@ -171,6 +171,22 @@
         }
 
         [TestMethod]
+        public void ParseForExpectNameNotEndOfCommand()
+        {
+            Parser parser = new Parser("for");
+
+            try
+            {
+                var result = parser.ParseCommand();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(ParserException));
+                Assert.AreEqual("Name expected", ex.Message);
+            }
+        }
+
+        [TestMethod]
         public void ParseForExpectEqual()
         {
             Parser parser = new Parser("for k 1 to 4\n a = a + k\n b = 0\nend\n");
