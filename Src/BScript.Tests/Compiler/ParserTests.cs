@@ -78,6 +78,23 @@
         }
 
         [TestMethod]
+        public void ParseReturnWithoutNewLine()
+        {
+            Parser parser = new Parser("return");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ReturnCommand));
+
+            var rtcmd = (ReturnCommand)result;
+
+            Assert.IsNull(rtcmd.Expression);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseReturnWithExpression()
         {
             Parser parser = new Parser("return 42\n");
