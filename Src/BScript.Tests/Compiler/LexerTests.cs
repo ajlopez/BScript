@@ -63,6 +63,20 @@
         }
 
         [TestMethod]
+        public void GetNameWithUnderscore()
+        {
+            Lexer lexer = new Lexer("foo_bar");
+
+            var token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.Name, token.Type);
+            Assert.AreEqual("foo_bar", token.Value);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         public void GetNameEqual()
         {
             Lexer lexer = new Lexer("foo=");
