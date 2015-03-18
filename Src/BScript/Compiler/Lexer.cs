@@ -91,8 +91,11 @@
             if (char.IsDigit(ch))
                 return this.NextInteger();
 
-            return this.NextName();
-        }
+            if (char.IsLetter(ch) || ch == '_')
+                return this.NextName();
+
+            throw new LexerException(string.Format("Unexpected '{0}'", ch));
+       }
 
         public void PushToken(Token token)
         {

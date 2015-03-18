@@ -77,6 +77,37 @@
         }
 
         [TestMethod]
+        public void GetNameStartingWithUnderscore()
+        {
+            Lexer lexer = new Lexer("_foo_bar");
+
+            var token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.Name, token.Type);
+            Assert.AreEqual("_foo_bar", token.Value);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void GetUnexpectedToken()
+        {
+            Lexer lexer = new Lexer("#r");
+
+            try
+            {
+                lexer.NextToken();
+                Assert.Fail();
+            }
+            catch (Exception e)
+            {
+                Assert.IsInstanceOfType(e, typeof(LexerException));
+                Assert.AreEqual(e.Message, "Unexpected '#'");
+            }
+        }
+
+        [TestMethod]
         public void GetNameEqual()
         {
             Lexer lexer = new Lexer("foo=");
