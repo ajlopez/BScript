@@ -149,6 +149,8 @@
 
             if (this.position < this.length)
                 this.position++;
+            else
+                throw new LexerException("Unclosed string");
 
             return new Token(TokenType.String, value);
         }

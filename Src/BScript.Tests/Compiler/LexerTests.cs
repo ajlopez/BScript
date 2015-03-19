@@ -360,6 +360,23 @@
         }
 
         [TestMethod]
+        public void GetUnclosedString()
+        {
+            Lexer lexer = new Lexer("\"foo");
+
+            try
+            {
+                lexer.NextToken();
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(LexerException));
+                Assert.AreEqual("Unclosed string", ex.Message);
+            }
+        }
+
+        [TestMethod]
         public void GetEndOfLineFromNewLine()
         {
             Lexer lexer = new Lexer("\n");
