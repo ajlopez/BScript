@@ -22,5 +22,31 @@
 
             Assert.AreEqual(false, expr.Evaluate(null));
         }
+
+        [TestMethod]
+        public void OrFalseTrue()
+        {
+            var lexpr = new ConstantExpression(false);
+            var rexpr = new ConstantExpression(true);
+            var expr = new OrExpression(lexpr, rexpr);
+
+            Assert.AreSame(lexpr, expr.LeftExpression);
+            Assert.AreSame(rexpr, expr.RightExpression);
+
+            Assert.AreEqual(true, expr.Evaluate(null));
+        }
+
+        [TestMethod]
+        public void OrTrueFalse()
+        {
+            var lexpr = new ConstantExpression(true);
+            var rexpr = new ConstantExpression(false);
+            var expr = new OrExpression(lexpr, rexpr);
+
+            Assert.AreSame(lexpr, expr.LeftExpression);
+            Assert.AreSame(rexpr, expr.RightExpression);
+
+            Assert.AreEqual(true, expr.Evaluate(null));
+        }
     }
 }

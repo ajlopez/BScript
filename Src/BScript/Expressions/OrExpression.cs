@@ -23,10 +23,13 @@
 
         public object Evaluate(Context context)
         {
-            if (false.Equals(this.left.Evaluate(context)))
-                return false;
+            if (true.Equals(this.left.Evaluate(context)))
+                return true;
 
-            return true;
+            if (true.Equals(this.right.Evaluate(context)))
+                return true;
+
+            return false;
         }
     }
 }
