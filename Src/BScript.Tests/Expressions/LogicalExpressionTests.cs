@@ -11,107 +11,24 @@
     public class LogicalExpressionTests
     {
         [TestMethod]
-        public void OrFalseFalse()
+        public void EvaluateOrExpression()
         {
-            var lexpr = new ConstantExpression(false);
-            var rexpr = new ConstantExpression(false);
-            var expr = new OrExpression(lexpr, rexpr);
+            Assert.AreEqual(false, EvaluateOr(false, false));
+            Assert.AreEqual(false, EvaluateOr(null, null));
+            Assert.AreEqual(false, EvaluateOr(false, null));
+            Assert.AreEqual(false, EvaluateOr(null, false));
 
-            Assert.AreSame(lexpr, expr.LeftExpression);
-            Assert.AreSame(rexpr, expr.RightExpression);
+            Assert.AreEqual(true, EvaluateOr(true, false));
+            Assert.AreEqual(true, EvaluateOr(true, true));
+            Assert.AreEqual(true, EvaluateOr(false, true));
 
-            Assert.AreEqual(false, expr.Evaluate(null));
+            Assert.AreEqual(true, EvaluateOr(true, null));
+            Assert.AreEqual(true, EvaluateOr(null, true));
         }
 
-        [TestMethod]
-        public void OrNullNull()
+        private static object EvaluateOr(object left, object right)
         {
-            var lexpr = new ConstantExpression(null);
-            var rexpr = new ConstantExpression(null);
-            var expr = new OrExpression(lexpr, rexpr);
-
-            Assert.AreSame(lexpr, expr.LeftExpression);
-            Assert.AreSame(rexpr, expr.RightExpression);
-
-            Assert.AreEqual(false, expr.Evaluate(null));
-        }
-
-        [TestMethod]
-        public void OrNullFalse()
-        {
-            var lexpr = new ConstantExpression(null);
-            var rexpr = new ConstantExpression(false);
-            var expr = new OrExpression(lexpr, rexpr);
-
-            Assert.AreSame(lexpr, expr.LeftExpression);
-            Assert.AreSame(rexpr, expr.RightExpression);
-
-            Assert.AreEqual(false, expr.Evaluate(null));
-        }
-
-        [TestMethod]
-        public void OrFalseNull()
-        {
-            var lexpr = new ConstantExpression(false);
-            var rexpr = new ConstantExpression(null);
-            var expr = new OrExpression(lexpr, rexpr);
-
-            Assert.AreSame(lexpr, expr.LeftExpression);
-            Assert.AreSame(rexpr, expr.RightExpression);
-
-            Assert.AreEqual(false, expr.Evaluate(null));
-        }
-
-        [TestMethod]
-        public void OrFalseTrue()
-        {
-            var lexpr = new ConstantExpression(false);
-            var rexpr = new ConstantExpression(true);
-            var expr = new OrExpression(lexpr, rexpr);
-
-            Assert.AreSame(lexpr, expr.LeftExpression);
-            Assert.AreSame(rexpr, expr.RightExpression);
-
-            Assert.AreEqual(true, expr.Evaluate(null));
-        }
-
-        [TestMethod]
-        public void OrTrueFalse()
-        {
-            var lexpr = new ConstantExpression(true);
-            var rexpr = new ConstantExpression(false);
-            var expr = new OrExpression(lexpr, rexpr);
-
-            Assert.AreSame(lexpr, expr.LeftExpression);
-            Assert.AreSame(rexpr, expr.RightExpression);
-
-            Assert.AreEqual(true, expr.Evaluate(null));
-        }
-
-        [TestMethod]
-        public void OrNullTrue()
-        {
-            var lexpr = new ConstantExpression(null);
-            var rexpr = new ConstantExpression(true);
-            var expr = new OrExpression(lexpr, rexpr);
-
-            Assert.AreSame(lexpr, expr.LeftExpression);
-            Assert.AreSame(rexpr, expr.RightExpression);
-
-            Assert.AreEqual(true, expr.Evaluate(null));
-        }
-
-        [TestMethod]
-        public void OrTrueNull()
-        {
-            var lexpr = new ConstantExpression(true);
-            var rexpr = new ConstantExpression(null);
-            var expr = new OrExpression(lexpr, rexpr);
-
-            Assert.AreSame(lexpr, expr.LeftExpression);
-            Assert.AreSame(rexpr, expr.RightExpression);
-
-            Assert.AreEqual(true, expr.Evaluate(null));
+            return (new OrExpression(new ConstantExpression(left), new ConstantExpression(right))).Evaluate(null);
         }
     }
 }
