@@ -26,9 +26,30 @@
             Assert.AreEqual(true, EvaluateOr(null, true));
         }
 
+        [TestMethod]
+        public void EvaluateAndExpression()
+        {
+            Assert.AreEqual(false, EvaluateAnd(false, false));
+            Assert.AreEqual(false, EvaluateAnd(null, null));
+            Assert.AreEqual(false, EvaluateAnd(false, null));
+            Assert.AreEqual(false, EvaluateAnd(null, false));
+
+            Assert.AreEqual(false, EvaluateAnd(true, false));
+            Assert.AreEqual(true, EvaluateAnd(true, true));
+            Assert.AreEqual(false, EvaluateAnd(false, true));
+
+            Assert.AreEqual(false, EvaluateAnd(true, null));
+            Assert.AreEqual(false, EvaluateAnd(null, true));
+        }
+
         private static object EvaluateOr(object left, object right)
         {
             return (new OrExpression(new ConstantExpression(left), new ConstantExpression(right))).Evaluate(null);
+        }
+
+        private static object EvaluateAnd(object left, object right)
+        {
+            return (new AndExpression(new ConstantExpression(left), new ConstantExpression(right))).Evaluate(null);
         }
     }
 }
