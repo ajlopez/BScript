@@ -23,10 +23,14 @@
 
         public object Evaluate(Context context)
         {
-            if (true.Equals(this.left.Evaluate(context)))
+            object lvalue = this.left.Evaluate(context);
+
+            if (lvalue != null && !false.Equals(lvalue))
                 return true;
 
-            if (true.Equals(this.right.Evaluate(context)))
+            object rvalue = this.right.Evaluate(context);
+
+            if (rvalue != null && !false.Equals(rvalue))
                 return true;
 
             return false;
