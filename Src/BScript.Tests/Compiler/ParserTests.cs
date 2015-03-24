@@ -752,6 +752,26 @@
         }
 
         [TestMethod]
+        public void ParseAndExpression()
+        {
+            Parser parser = new Parser("a and b");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(AndExpression));
+
+            var andexpr = (AndExpression)result;
+
+            Assert.IsNotNull(andexpr.LeftExpression);
+            Assert.IsNotNull(andexpr.RightExpression);
+            Assert.IsInstanceOfType(andexpr.LeftExpression, typeof(NameExpression));
+            Assert.AreEqual("a", ((NameExpression)andexpr.LeftExpression).Name);
+            Assert.IsInstanceOfType(andexpr.RightExpression, typeof(NameExpression));
+            Assert.AreEqual("b", ((NameExpression)andexpr.RightExpression).Name);
+        }
+
+        [TestMethod]
         public void ParseCall()
         {
             Parser parser = new Parser("foo(1, 2)");

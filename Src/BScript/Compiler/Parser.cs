@@ -72,7 +72,7 @@
 
         public IExpression ParseExpression()
         {
-            IExpression expr = this.ParseBinaryExpression(0);
+            IExpression expr = this.ParseLogicalExpression();
 
             if (expr is NameExpression && this.TryParseToken(TokenType.Operator, "="))
                 return new AssignExpression(((NameExpression)expr).Name, this.ParseExpression());
@@ -213,6 +213,19 @@
                 return new WhileCommand(cond, cmds[0]);
 
             return new WhileCommand(cond, new CompositeCommand(cmds));
+        }
+
+        private IExpression ParseLogicalExpression()
+        {
+            IExpression expr = this.ParseBinaryExpression(0);
+
+            if (expr == null)
+                return null;
+
+            while (this.TryParseToken(TokenType.Name, "and"))
+                expr = new AndExpression(expr, this.ParseBinaryExpression(0));
+
+            return expr;
         }
 
         private IExpression ParseBinaryExpression(int level)
