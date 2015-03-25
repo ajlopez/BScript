@@ -225,6 +225,9 @@
             while (this.TryParseToken(TokenType.Name, "and"))
                 expr = new AndExpression(expr, this.ParseBinaryExpression(0));
 
+            while (this.TryParseToken(TokenType.Name, "or"))
+                expr = new OrExpression(expr, this.ParseBinaryExpression(0));
+
             return expr;
         }
 

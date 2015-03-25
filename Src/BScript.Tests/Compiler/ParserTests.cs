@@ -772,6 +772,26 @@
         }
 
         [TestMethod]
+        public void ParseOrExpression()
+        {
+            Parser parser = new Parser("a or b");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(OrExpression));
+
+            var orexpr = (OrExpression)result;
+
+            Assert.IsNotNull(orexpr.LeftExpression);
+            Assert.IsNotNull(orexpr.RightExpression);
+            Assert.IsInstanceOfType(orexpr.LeftExpression, typeof(NameExpression));
+            Assert.AreEqual("a", ((NameExpression)orexpr.LeftExpression).Name);
+            Assert.IsInstanceOfType(orexpr.RightExpression, typeof(NameExpression));
+            Assert.AreEqual("b", ((NameExpression)orexpr.RightExpression).Name);
+        }
+
+        [TestMethod]
         public void ParseCall()
         {
             Parser parser = new Parser("foo(1, 2)");
