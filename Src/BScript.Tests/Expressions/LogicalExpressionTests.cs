@@ -42,6 +42,17 @@
             Assert.AreEqual(false, EvaluateAnd(null, true));
         }
 
+        [TestMethod]
+        public void EvaluateNotExpression()
+        {
+            Assert.AreEqual(true, EvaluateNot(false));
+            Assert.AreEqual(true, EvaluateNot(null));
+
+            Assert.AreEqual(false, EvaluateNot(true));
+            Assert.AreEqual(false, EvaluateNot(1));
+            Assert.AreEqual(false, EvaluateNot("foo"));
+        }
+
         private static object EvaluateOr(object left, object right)
         {
             return (new OrExpression(new ConstantExpression(left), new ConstantExpression(right))).Evaluate(null);
@@ -50,6 +61,11 @@
         private static object EvaluateAnd(object left, object right)
         {
             return (new AndExpression(new ConstantExpression(left), new ConstantExpression(right))).Evaluate(null);
+        }
+
+        private static object EvaluateNot(object value)
+        {
+            return (new NotExpression(new ConstantExpression(value))).Evaluate(null);
         }
     }
 }

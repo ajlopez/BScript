@@ -63,6 +63,7 @@
     <Compile Include="Expressions\BinaryOperatorExpression.cs" />
     <Compile Include="Expressions\CallExpression.cs" />
     <Compile Include="Expressions\AndExpression.cs" />
+    <Compile Include="Expressions\NotExpression.cs" />
     <Compile Include="Expressions\OrExpression.cs" />
     <Compile Include="Expressions\IExpression.cs" />
     <Compile Include="Expressions\NameExpression.cs" />
