@@ -230,13 +230,26 @@
 
         private IExpression ParseAndLogicalExpression()
         {
-            IExpression expr = this.ParseBinaryExpression(0);
+            IExpression expr = this.ParseNotLogicalExpression();
 
             if (expr == null)
                 return null;
 
             while (this.TryParseToken(TokenType.Name, "and"))
-                expr = new AndExpression(expr, this.ParseBinaryExpression(0));
+                expr = new AndExpression(expr, this.ParseNotLogicalExpression());
+
+            return expr;
+        }
+
+        private IExpression ParseNotLogicalExpression()
+        {
+            IExpression expr = null;
+
+            while (this.TryParseToken(TokenType.Name, "not"))
+                expr = new NotExpression(this.ParseBinaryExpression(0));
+
+            if (expr == null)
+                expr = this.ParseBinaryExpression(0);
 
             return expr;
         }
