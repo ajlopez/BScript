@@ -246,7 +246,7 @@
             IExpression expr = null;
 
             while (this.TryParseToken(TokenType.Name, "not"))
-                expr = new NotExpression(this.ParseBinaryExpression(0));
+                expr = new NotExpression(this.ParseNotLogicalExpression());
 
             if (expr == null)
                 expr = this.ParseBinaryExpression(0);

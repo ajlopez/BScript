@@ -809,6 +809,26 @@
         }
 
         [TestMethod]
+        public void ParseNestedNotExpression()
+        {
+            Parser parser = new Parser("not not a");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(NotExpression));
+
+            var notexpr = (NotExpression)result;
+
+            Assert.IsNotNull(notexpr.Expression);
+            Assert.IsInstanceOfType(notexpr.Expression, typeof(NotExpression));
+
+            var not2expr = (NotExpression)notexpr.Expression;
+            Assert.IsInstanceOfType(not2expr.Expression, typeof(NameExpression));
+            Assert.AreEqual("a", ((NameExpression)not2expr.Expression).Name);
+        }
+
+        [TestMethod]
         public void ParseOrAndExpression()
         {
             Parser parser = new Parser("a or b and c");
