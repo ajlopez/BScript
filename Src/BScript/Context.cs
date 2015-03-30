@@ -20,6 +20,8 @@
             this.parent = parent;
         }
 
+        public Context Parent { get { return this.parent; } }
+
         public bool HasReturn { get; set; }
 
         public object ReturnValue { get; set; }

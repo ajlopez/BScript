@@ -6,7 +6,7 @@
     using System.Text;
     using BScript.Language;
 
-    public class CallExpression : BScript.Expressions.IExpression
+    public class CallExpression : IExpression
     {
         private string name;
         private IList<IExpression> argexprs;
