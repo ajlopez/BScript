@@ -23,7 +23,14 @@
 
         public object Evaluate(Context context)
         {
-            throw new NotImplementedException();
+            var type = (Type)this.expression.Evaluate(context);
+
+            IList<object> args = new List<object>();
+
+            foreach (var argexpr in this.argexprs)
+                args.Add(argexpr.Evaluate(context));
+
+            return Activator.CreateInstance(type, args.ToArray());
         }
     }
 }

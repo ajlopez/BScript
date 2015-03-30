@@ -36,7 +36,7 @@
             var result = expr.Evaluate(null);
 
             Assert.IsNotNull(result);
-            Assert.IsNotInstanceOfType(result, typeof(Context));
+            Assert.IsInstanceOfType(result, typeof(Context));
 
             var context = (Context)result;
 
