@@ -889,6 +889,30 @@
             }
         }
 
+        [TestMethod]
+        public void ParseNewExpression()
+        {
+            Parser parser = new Parser("new Context(parent)");
+
+            var expr = parser.ParseExpression();
+
+            Assert.IsNotNull(expr);
+            Assert.IsInstanceOfType(expr, typeof(NewExpression));
+
+            var newexpr = (NewExpression)expr;
+            
+            Assert.IsNotNull(newexpr.Expression);
+            Assert.IsInstanceOfType(newexpr.Expression, typeof(NameExpression));
+            Assert.AreEqual("Context", ((NameExpression)newexpr.Expression).Name);
+
+            Assert.IsNotNull(newexpr.ArgumentExpressions);
+            Assert.AreEqual(1, newexpr.ArgumentExpressions.Count);
+            Assert.IsInstanceOfType(newexpr.ArgumentExpressions[0], typeof(NameExpression));
+            Assert.AreEqual("parent", ((NameExpression)newexpr.ArgumentExpressions[0]).Name);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
         private static void IsBinaryOperation(IExpression expr, BinaryOperator oper, int left, int right)
         {
             Assert.IsInstanceOfType(expr, typeof(BinaryOperatorExpression));

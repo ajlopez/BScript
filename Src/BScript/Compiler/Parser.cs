@@ -345,6 +345,12 @@
 
             if (token.Type == TokenType.Name)
             {
+                if (token.Value == "new")
+                {
+                    var callexpr = (CallExpression)this.ParseSimpleExpression();
+                    return new NewExpression(new NameExpression(callexpr.Name), callexpr.ArgumentExpressions);
+                }
+
                 if (!this.TryParseToken(TokenType.Delimiter, "("))
                     return new NameExpression(token.Value);
 
