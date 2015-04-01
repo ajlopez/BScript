@@ -60,6 +60,7 @@
     <Compile Include="Expressions\CallExpressionTests.cs" />
     <Compile Include="Expressions\ConstantExpressionTests.cs" />
     <Compile Include="Expressions\BinaryOperatorExpressionTests.cs" />
+    <Compile Include="Expressions\DotExpressionTests.cs" />
     <Compile Include="Expressions\NewExpressionTests.cs" />
     <Compile Include="Expressions\LogicalExpressionTests.cs" />
     <Compile Include="Expressions\NameExpressionTests.cs" />
