@@ -22,5 +22,19 @@
             Assert.AreEqual("Foo", expr.Name);
             Assert.AreSame(lexpr, expr.Expression);
         }
+
+        [TestMethod]
+        public void EvaluateDotExpression()
+        {
+            Context parent = new Context();
+            Context context = new Context(parent);
+            IExpression lexpr = new ConstantExpression(context);
+
+            var expr = new DotExpression(lexpr, "Parent");
+            var value = expr.Evaluate(null);
+
+            Assert.IsNotNull(value);
+            Assert.AreSame(parent, value);
+        }
     }
 }
