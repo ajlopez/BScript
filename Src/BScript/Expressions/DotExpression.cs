@@ -23,7 +23,9 @@
 
         public object Evaluate(Context context)
         {
-            throw new NotImplementedException();
+            var value = this.expression.Evaluate(context);
+            var type = value.GetType();
+            return type.InvokeMember(this.name, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.GetProperty, null, value, null);
         }
     }
 }
