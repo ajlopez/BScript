@@ -352,7 +352,14 @@
                 }
 
                 if (!this.TryParseToken(TokenType.Delimiter, "("))
-                    return new NameExpression(token.Value);
+                {
+                    IExpression expr = new NameExpression(token.Value);
+
+                    while (this.TryParseToken(TokenType.Delimiter, "."))
+                        expr = new DotExpression(expr, this.ParseName());
+
+                    return expr;
+                }
 
                 IList<IExpression> argexprs = new List<IExpression>();
 

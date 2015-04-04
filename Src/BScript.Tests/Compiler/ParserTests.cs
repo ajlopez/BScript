@@ -913,6 +913,25 @@
             Assert.IsNull(parser.ParseExpression());
         }
 
+        [TestMethod]
+        public void ParseDotExpression()
+        {
+            Parser parser = new Parser("context.Parent");
+
+            var expr = parser.ParseExpression();
+
+            Assert.IsNotNull(expr);
+            Assert.IsInstanceOfType(expr, typeof(DotExpression));
+
+            var dotexpr = (DotExpression)expr;
+
+            Assert.IsNotNull(dotexpr.Expression);
+            Assert.IsInstanceOfType(dotexpr.Expression, typeof(NameExpression));
+            Assert.AreEqual("context", ((NameExpression)dotexpr.Expression).Name);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
         private static void IsBinaryOperation(IExpression expr, BinaryOperator oper, int left, int right)
         {
             Assert.IsInstanceOfType(expr, typeof(BinaryOperatorExpression));

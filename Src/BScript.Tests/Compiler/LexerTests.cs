@@ -49,6 +49,20 @@
         }
 
         [TestMethod]
+        public void GetDotAsDelimiter()
+        {
+            Lexer lexer = new Lexer(".");
+
+            var token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.Delimiter, token.Type);
+            Assert.AreEqual(".", token.Value);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         public void GetNameWithDigit()
         {
             Lexer lexer = new Lexer("foo1");
