@@ -15,12 +15,12 @@
         [TestMethod]
         public void CreateCallDotExpression()
         {
-            NameExpression nexpr = new NameExpression("foo");
+            DotExpression dotexpr = new DotExpression(new NameExpression("foo"), "bar");
             IList<IExpression> exprs = new List<IExpression>() { new ConstantExpression(1), new ConstantExpression(2) };
 
-            var expr = new CallDotExpression(nexpr, exprs);
+            var expr = new CallDotExpression(dotexpr, exprs);
 
-            Assert.AreEqual(nexpr, expr.Expression);
+            Assert.AreEqual(dotexpr, expr.Expression);
             Assert.AreSame(exprs, expr.ArgumentExpressions);
         }
     }
