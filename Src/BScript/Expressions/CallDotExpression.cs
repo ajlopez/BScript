@@ -23,12 +23,14 @@
 
         public object Evaluate(Context context)
         {
+            var value = this.expression.Expression.Evaluate(context);
+            var type = value.GetType();
             IList<object> args = new List<object>();
 
             foreach (var expr in this.argexprs)
                 args.Add(expr.Evaluate(context));
 
-            throw new NotImplementedException();
+            return type.InvokeMember(this.expression.Name, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.InvokeMethod, null, value, args.ToArray());
         }
     }
 }
