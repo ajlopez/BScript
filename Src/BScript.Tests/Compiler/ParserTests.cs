@@ -932,6 +932,31 @@
             Assert.IsNull(parser.ParseExpression());
         }
 
+        [TestMethod]
+        public void ParseCallDotExpression()
+        {
+            Parser parser = new Parser("context.GetValue(\"one\")");
+
+            var expr = parser.ParseExpression();
+
+            Assert.IsNotNull(expr);
+            Assert.IsInstanceOfType(expr, typeof(CallDotExpression));
+
+            var calldotexpr = (CallDotExpression)expr;
+
+            Assert.IsNotNull(calldotexpr.Expression);
+            Assert.IsInstanceOfType(calldotexpr.Expression, typeof(NameExpression));
+            Assert.AreEqual("GetValue", calldotexpr.Expression.Name);
+            Assert.IsInstanceOfType(calldotexpr.Expression.Expression, typeof(NameExpression));
+            Assert.AreEqual("context", ((NameExpression)calldotexpr.Expression.Expression).Name);
+            Assert.IsNotNull(calldotexpr.ArgumentExpressions);
+            Assert.AreEqual(1, calldotexpr.ArgumentExpressions.Count);
+            Assert.IsInstanceOfType(calldotexpr.ArgumentExpressions[0], typeof(ConstantExpression));
+            Assert.AreEqual("one", ((ConstantExpression)calldotexpr.ArgumentExpressions[0]).Value);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
         private static void IsBinaryOperation(IExpression expr, BinaryOperator oper, int left, int right)
         {
             Assert.IsInstanceOfType(expr, typeof(BinaryOperatorExpression));
