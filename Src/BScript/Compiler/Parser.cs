@@ -351,15 +351,13 @@
                     return new NewExpression(new NameExpression(callexpr.Name), callexpr.ArgumentExpressions);
                 }
 
+                IExpression expr = new NameExpression(token.Value);
+
+                while (this.TryParseToken(TokenType.Delimiter, "."))
+                    expr = new DotExpression(expr, this.ParseName());
+
                 if (!this.TryParseToken(TokenType.Delimiter, "("))
-                {
-                    IExpression expr = new NameExpression(token.Value);
-
-                    while (this.TryParseToken(TokenType.Delimiter, "."))
-                        expr = new DotExpression(expr, this.ParseName());
-
                     return expr;
-                }
 
                 IList<IExpression> argexprs = new List<IExpression>();
 
@@ -370,6 +368,9 @@
 
                     argexprs.Add(this.ParseExpression());
                 }
+
+                if (expr is DotExpression)
+                    return new CallDotExpression((DotExpression)expr, argexprs);
 
                 return new CallExpression(token.Value, argexprs);
             }

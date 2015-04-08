@@ -945,7 +945,6 @@
             var calldotexpr = (CallDotExpression)expr;
 
             Assert.IsNotNull(calldotexpr.Expression);
-            Assert.IsInstanceOfType(calldotexpr.Expression, typeof(NameExpression));
             Assert.AreEqual("GetValue", calldotexpr.Expression.Name);
             Assert.IsInstanceOfType(calldotexpr.Expression.Expression, typeof(NameExpression));
             Assert.AreEqual("context", ((NameExpression)calldotexpr.Expression.Expression).Name);
