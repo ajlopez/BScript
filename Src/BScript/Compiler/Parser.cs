@@ -351,28 +351,7 @@
                     return new NewExpression(new NameExpression(callexpr.Name), callexpr.ArgumentExpressions);
                 }
 
-                IExpression expr = new NameExpression(token.Value);
-
-                while (this.TryParseToken(TokenType.Delimiter, "."))
-                    expr = new DotExpression(expr, this.ParseName());
-
-                if (!this.TryParseToken(TokenType.Delimiter, "("))
-                    return expr;
-
-                IList<IExpression> argexprs = new List<IExpression>();
-
-                while (!this.TryParseToken(TokenType.Delimiter, ")"))
-                {
-                    if (argexprs.Count > 0)
-                        this.ParseToken(TokenType.Delimiter, ",");
-
-                    argexprs.Add(this.ParseExpression());
-                }
-
-                if (expr is DotExpression)
-                    return new CallDotExpression((DotExpression)expr, argexprs);
-
-                return new CallExpression(token.Value, argexprs);
+                return ParseSimpleNameExpression(token);
             }
 
             if (token.Type == TokenType.Delimiter && token.Value == "(")
@@ -383,6 +362,32 @@
             }
 
             throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
+        }
+
+        private IExpression ParseSimpleNameExpression(Token token)
+        {
+            IExpression expr = new NameExpression(token.Value);
+
+            while (this.TryParseToken(TokenType.Delimiter, "."))
+                expr = new DotExpression(expr, this.ParseName());
+
+            if (!this.TryParseToken(TokenType.Delimiter, "("))
+                return expr;
+
+            IList<IExpression> argexprs = new List<IExpression>();
+
+            while (!this.TryParseToken(TokenType.Delimiter, ")"))
+            {
+                if (argexprs.Count > 0)
+                    this.ParseToken(TokenType.Delimiter, ",");
+
+                argexprs.Add(this.ParseExpression());
+            }
+
+            if (expr is DotExpression)
+                return new CallDotExpression((DotExpression)expr, argexprs);
+
+            return new CallExpression(token.Value, argexprs);
         }
 
         private bool TryParseToken(TokenType type)
