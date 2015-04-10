@@ -95,6 +95,19 @@
             Assert.AreEqual(3, context.GetValue("a"));
         }
 
+        [TestMethod]
+        public void EvaluateNativeObjectFunctionCall()
+        {
+            Context context = new Context();
+            context.SetValue("context", context);
+            context.SetValue("one", 1);
+
+            var result = EvaluateExpression("context.GetValue(\"one\")", context);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result);
+        }
+
         private static object EvaluateExpression(string text, Context context = null)
         {
             var parser = new Parser(text);
