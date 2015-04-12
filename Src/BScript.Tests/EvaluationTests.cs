@@ -108,6 +108,19 @@
             Assert.AreEqual(1, result);
         }
 
+        [TestMethod]
+        public void EvaluateNativeObjectProperty()
+        {
+            Context parent = new Context();
+            Context context = new Context(parent);
+            context.SetValue("context", context);
+
+            var result = EvaluateExpression("context.Parent", context);
+
+            Assert.IsNotNull(result);
+            Assert.AreSame(parent, result);
+        }
+
         private static object EvaluateExpression(string text, Context context = null)
         {
             var parser = new Parser(text);
