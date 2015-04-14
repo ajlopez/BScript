@@ -71,6 +71,17 @@
         }
 
         [TestMethod]
+        public void ExecuteFileForWithStep()
+        {
+            var machine = new Machine();
+
+            machine.ExecuteFile("Files\\ForWithStep.txt");
+
+            Assert.AreEqual(9, machine.RootContext.GetValue("a"));
+            Assert.AreEqual(7, machine.RootContext.GetValue("k"));
+        }
+
+        [TestMethod]
         public void ExecuteFileInvokeFunctionBeforeDefinition()
         {
             var machine = new Machine();

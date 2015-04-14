@@ -76,6 +76,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Files\ForWithStep.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Files\For.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
