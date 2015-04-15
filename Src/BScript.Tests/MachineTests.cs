@@ -60,6 +60,17 @@
         }
 
         [TestMethod]
+        public void ExecuteFileWhile()
+        {
+            var machine = new Machine();
+
+            machine.ExecuteFile("Files\\While.txt");
+
+            Assert.AreEqual(10, machine.RootContext.GetValue("a"));
+            Assert.AreEqual(5, machine.RootContext.GetValue("k"));
+        }
+
+        [TestMethod]
         public void ExecuteFileFor()
         {
             var machine = new Machine();
