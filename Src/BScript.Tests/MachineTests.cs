@@ -16,6 +16,17 @@
         }
 
         [TestMethod]
+        public void CreateWithMachineVariable()
+        {
+            var machine = new Machine();
+
+            var result = machine.RootContext.GetValue("machine");
+
+            Assert.IsNotNull(result);
+            Assert.AreSame(machine, result);
+        }
+
+        [TestMethod]
         public void ExecuteCodeSetVariable()
         {
             var machine = new Machine();

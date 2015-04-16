@@ -15,6 +15,7 @@
         public Machine()
         {
             this.context = new Context();
+            this.context.SetValue("machine", this);
         }
 
         public Context RootContext { get { return this.context; } }
