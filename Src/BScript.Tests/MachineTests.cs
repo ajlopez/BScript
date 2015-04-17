@@ -126,5 +126,16 @@
             Assert.AreEqual(6, machine.RootContext.GetValue("f3"));
             Assert.AreEqual(24, machine.RootContext.GetValue("f4"));
         }
+
+        [TestMethod]
+        public void ExecuteFileMachineContext()
+        {
+            var machine = new Machine();
+
+            machine.ExecuteFile("Files\\MachineContext.txt");
+
+            Assert.AreEqual(1, machine.RootContext.GetValue("a"));
+            Assert.AreEqual(1, machine.RootContext.GetValue("b"));
+        }
     }
 }

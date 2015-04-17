@@ -1,0 +1,7 @@
+﻿
+a = 1
+b = machine.RootContext.GetValue("a")
+
+
+
+
