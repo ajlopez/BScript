@@ -42,5 +42,24 @@
 
             Assert.AreSame(parent, context.Parent);
         }
+
+        [TestMethod]
+        public void EvaluateNewExpressionUsingTypeName()
+        {
+            Context parent = new Context();
+            IExpression texpr = new DotExpression(new NameExpression("BScript"), "Context");
+            IList<IExpression> exprs = new List<IExpression>() { new ConstantExpression(parent) };
+
+            var expr = new NewExpression(texpr, exprs);
+
+            var result = expr.Evaluate(null);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Context));
+
+            var context = (Context)result;
+
+            Assert.AreSame(parent, context.Parent);
+        }
     }
 }
