@@ -24,6 +24,30 @@
         }
 
         [TestMethod]
+        public void CreateDotExpressionWithName()
+        {
+            IExpression nexpr = new NameExpression("Bar");
+
+            var expr = new DotExpression(nexpr, "Foo");
+
+            Assert.AreEqual("Foo", expr.Name);
+            Assert.AreEqual("Bar.Foo", expr.FullName);
+            Assert.AreSame(nexpr, expr.Expression);
+        }
+
+        [TestMethod]
+        public void CreateDotExpressionWithQualifiedName()
+        {
+            IExpression nexpr = new DotExpression(new NameExpression("Bar"), "Foo");
+
+            var expr = new DotExpression(nexpr, "Doo");
+
+            Assert.AreEqual("Doo", expr.Name);
+            Assert.AreEqual("Bar.Foo.Doo", expr.FullName);
+            Assert.AreSame(nexpr, expr.Expression);
+        }
+
+        [TestMethod]
         public void EvaluateDotExpression()
         {
             Context parent = new Context();

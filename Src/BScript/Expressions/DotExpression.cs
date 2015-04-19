@@ -21,6 +21,17 @@
 
         public string Name { get { return this.name; } }
 
+        public string FullName
+        {
+            get
+            {
+                if (this.expression is DotExpression)
+                    return ((DotExpression)this.expression).FullName + "." + this.name;
+
+                return ((NameExpression)this.expression).Name + "." + this.name;
+            }
+        }
+
         public object Evaluate(Context context)
         {
             var value = this.expression.Evaluate(context);
