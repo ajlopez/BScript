@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using BScript.Language;
+    using BScript.Utilities;
 
     public class NewExpression : IExpression
     {
@@ -23,7 +24,12 @@
 
         public object Evaluate(Context context)
         {
-            var type = (Type)this.expression.Evaluate(context);
+            Type type;
+                
+            if (this.expression is DotExpression)
+                type = TypeUtilities.GetType(((DotExpression)this.expression).FullName);
+            else
+                type = (Type)this.expression.Evaluate(context);
 
             IList<object> args = new List<object>();
 
