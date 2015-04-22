@@ -1,0 +1,9 @@
+﻿
+parent = new BScript.Context()
+context = new BScript.Context(parent)
+
+parent.SetValue("a", 1)
+context.SetValue("b", 2)
+
+
+

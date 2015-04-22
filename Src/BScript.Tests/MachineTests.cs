@@ -93,6 +93,24 @@
         }
 
         [TestMethod]
+        public void ExecuteFileNew()
+        {
+            var machine = new Machine();
+
+            machine.ExecuteFile("Files\\New.txt");
+
+            var result = machine.RootContext.GetValue("context");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Context));
+
+            var context = (Context)result;
+
+            Assert.IsNotNull(context.Parent);
+            Assert.AreSame(context.Parent, machine.RootContext.GetValue("parent"));
+        }
+
+        [TestMethod]
         public void ExecuteFileForWithStep()
         {
             var machine = new Machine();

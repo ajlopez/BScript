@@ -347,8 +347,17 @@
             {
                 if (token.Value == "new")
                 {
-                    var callexpr = (CallExpression)this.ParseSimpleExpression();
-                    return new NewExpression(new NameExpression(callexpr.Name), callexpr.ArgumentExpressions);
+                    var newexpr = this.ParseSimpleExpression();
+
+                    if (newexpr is CallExpression)
+                    {
+                        var callexpr = (CallExpression)newexpr;
+                        return new NewExpression(new NameExpression(callexpr.Name), callexpr.ArgumentExpressions);
+                    }
+
+                    var calldotexpr = (CallDotExpression)newexpr;
+
+                    return new NewExpression(calldotexpr.Expression, calldotexpr.ArgumentExpressions);
                 }
 
                 return ParseSimpleNameExpression(token);
