@@ -23,11 +23,6 @@
             if (type != null)
                 return type;
 
-            type = GetTypeFromPartialNamedAssembly(name);
-
-            if (type != null)
-                return type;
-
             LoadReferencedAssemblies();
 
             type = GetTypeFromLoadedAssemblies(name);
@@ -114,27 +109,6 @@
                         namespaces.Add(type.Namespace);
 
             return namespaces;
-        }
-
-        private static Type GetTypeFromPartialNamedAssembly(string name)
-        {
-            int p = name.LastIndexOf(".");
-
-            if (p < 0)
-                return null;
-
-            string assemblyName = name.Substring(0, p);
-
-            try
-            {
-                Assembly assembly = Assembly.LoadWithPartialName(assemblyName);
-
-                return assembly.GetType(name);
-            }
-            catch
-            {
-                return null;
-            }
         }
 
         private static Type GetTypeFromLoadedAssemblies(string name)
