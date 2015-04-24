@@ -71,6 +71,7 @@
     <Compile Include="Language\FunctionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MachineTests.cs" />
+    <Compile Include="Utilities\ObjectUtilitiesTests.cs" />
     <Compile Include="Utilities\TypeUtilitiesTests.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -73,6 +73,7 @@
     <Compile Include="Language\Function.cs" />
     <Compile Include="Machine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\ObjectUtilities.cs" />
     <Compile Include="Utilities\TypeUtilities.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
