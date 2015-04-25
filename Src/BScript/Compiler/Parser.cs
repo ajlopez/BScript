@@ -360,7 +360,7 @@
                     return new NewExpression(calldotexpr.Expression, calldotexpr.ArgumentExpressions);
                 }
 
-                return ParseSimpleNameExpression(token);
+                return this.ParseSimpleNameExpression(token);
             }
 
             if (token.Type == TokenType.Delimiter && token.Value == "(")

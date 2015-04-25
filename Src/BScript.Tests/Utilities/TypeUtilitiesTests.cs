@@ -5,10 +5,10 @@
     using System.Linq;
     using System.Reflection;
     using System.Text;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using BScript.Compiler;
-    using BScript.Utilities;
     using BScript.Tests.Classes;
+    using BScript.Utilities;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class TypeUtilitiesTests

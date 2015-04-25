@@ -1,11 +1,11 @@
 ﻿namespace BScript.Tests.Expressions
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System.Text;
     using BScript.Expressions;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class LogicalExpressionTests
