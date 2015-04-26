@@ -81,6 +81,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Files\If.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Files\New.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

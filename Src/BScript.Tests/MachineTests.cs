@@ -82,6 +82,17 @@
         }
 
         [TestMethod]
+        public void ExecuteFileIf()
+        {
+            var machine = new Machine();
+
+            machine.ExecuteFile("Files\\If.txt");
+
+            Assert.AreEqual(2, machine.RootContext.GetValue("a"));
+            Assert.AreEqual(1, machine.RootContext.GetValue("b"));
+        }
+
+        [TestMethod]
         public void ExecuteFileFor()
         {
             var machine = new Machine();
