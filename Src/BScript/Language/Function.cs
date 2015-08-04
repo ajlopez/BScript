@@ -6,7 +6,7 @@
     using System.Text;
     using BScript.Commands;
 
-    public class Function
+    public class Function : BScript.Language.IFunction
     {
         private IList<string> argnames;
         private ICommand body;

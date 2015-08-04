@@ -23,7 +23,7 @@
 
         public object Evaluate(Context context)
         {
-            Function func = (Function)context.GetValue(this.name);
+            IFunction func = (IFunction)context.GetValue(this.name);
             IList<object> args = new List<object>();
 
             foreach (var expr in this.argexprs)
