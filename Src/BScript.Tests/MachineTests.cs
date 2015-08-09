@@ -166,5 +166,13 @@
             Assert.AreEqual(1, machine.RootContext.GetValue("a"));
             Assert.AreEqual(1, machine.RootContext.GetValue("b"));
         }
+
+        [TestMethod]
+        public void InitialOutputPointsToConsoleOut()
+        {
+            var machine = new Machine();
+
+            Assert.AreSame(System.Console.Out, machine.Out);
+        }
     }
 }

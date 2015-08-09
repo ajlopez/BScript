@@ -11,14 +11,18 @@
     public class Machine
     {
         private Context context;
+        private TextWriter outWriter;
 
         public Machine()
         {
+            this.outWriter = System.Console.Out;
             this.context = new Context();
             this.context.SetValue("machine", this);
         }
 
         public Context RootContext { get { return this.context; } }
+
+        public TextWriter Out { get { return this.outWriter; } }
 
         public void Execute(string code)
         {
