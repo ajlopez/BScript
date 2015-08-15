@@ -27,11 +27,12 @@
             get 
             { 
                 return this.outWriter; 
-            } 
+            }
+
             set 
             {
                 this.outWriter = value;
-            } 
+            }
         }
 
         public void Execute(string code)
