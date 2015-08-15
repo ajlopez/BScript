@@ -69,6 +69,7 @@
     <Compile Include="Expressions\LogicalExpressionTests.cs" />
     <Compile Include="Expressions\NameExpressionTests.cs" />
     <Compile Include="Language\FunctionTests.cs" />
+    <Compile Include="Language\PrintTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MachineTests.cs" />
     <Compile Include="Utilities\ObjectUtilitiesTests.cs" />

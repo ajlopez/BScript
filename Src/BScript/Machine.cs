@@ -22,7 +22,17 @@
 
         public Context RootContext { get { return this.context; } }
 
-        public TextWriter Out { get { return this.outWriter; } }
+        public TextWriter Out 
+        { 
+            get 
+            { 
+                return this.outWriter; 
+            } 
+            set 
+            {
+                this.outWriter = value;
+            } 
+        }
 
         public void Execute(string code)
         {
