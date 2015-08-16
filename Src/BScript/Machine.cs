@@ -37,9 +37,14 @@
 
         public void Execute(string code)
         {
+            Execute(code, this.context);
+        }
+
+        public static void Execute(string code, Context context)
+        {
             Parser parser = new Parser(code);
             ICommand cmd = parser.ParseCommands();
-            cmd.Execute(this.context);
+            cmd.Execute(context);
         }
 
         public void ExecuteFile(string filename)
