@@ -49,8 +49,13 @@
 
         public void ExecuteFile(string filename)
         {
+            ExecuteFile(filename, this.context);
+        }
+
+        public static void ExecuteFile(string filename, Context context)
+        {
             var code = File.ReadAllText(filename);
-            this.Execute(code);
+            Execute(code, context);
         }
     }
 }
