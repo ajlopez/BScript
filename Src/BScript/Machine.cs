@@ -7,6 +7,7 @@
     using System.Text;
     using BScript.Commands;
     using BScript.Compiler;
+    using BScript.Language;
 
     public class Machine
     {
@@ -18,6 +19,7 @@
             this.outWriter = System.Console.Out;
             this.context = new Context();
             this.context.SetValue("machine", this);
+            this.context.SetValue("print", new Print(this));
         }
 
         public Context RootContext { get { return this.context; } }

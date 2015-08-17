@@ -1,6 +1,7 @@
 ﻿namespace BScript.Tests
 {
     using System;
+    using System.IO;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -173,6 +174,18 @@
             var machine = new Machine();
 
             Assert.AreSame(System.Console.Out, machine.Out);
+        }
+
+        [TestMethod]
+        public void PrintHello()
+        {
+            var machine = new Machine();
+            var sw = new StringWriter();
+            machine.Out = sw;
+
+            machine.Execute("print(\"Hello, world\")");
+
+            Assert.AreEqual("Hello, world", sw.ToString());
         }
     }
 }
