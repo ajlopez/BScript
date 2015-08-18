@@ -37,11 +37,6 @@
             }
         }
 
-        public void Execute(string code)
-        {
-            Execute(code, this.context);
-        }
-
         public static void Execute(string code, Context context)
         {
             Parser parser = new Parser(code);
@@ -49,15 +44,20 @@
             cmd.Execute(context);
         }
 
-        public void ExecuteFile(string filename)
-        {
-            ExecuteFile(filename, this.context);
-        }
-
         public static void ExecuteFile(string filename, Context context)
         {
             var code = File.ReadAllText(filename);
             Execute(code, context);
+        }
+
+        public void Execute(string code)
+        {
+            Execute(code, this.context);
+        }
+
+        public void ExecuteFile(string filename)
+        {
+            ExecuteFile(filename, this.context);
         }
     }
 }
