@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using Microsoft.VisualBasic.CompilerServices;
+    using BScript.Language;
 
     public class OrExpression : IExpression
     {
@@ -25,12 +26,12 @@
         {
             object lvalue = this.left.Evaluate(context);
 
-            if (lvalue != null && !false.Equals(lvalue))
+            if (Predicates.IsTrue(lvalue))
                 return true;
 
             object rvalue = this.right.Evaluate(context);
 
-            if (rvalue != null && !false.Equals(rvalue))
+            if (Predicates.IsTrue(rvalue))
                 return true;
 
             return false;

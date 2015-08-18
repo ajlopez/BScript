@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using Microsoft.VisualBasic.CompilerServices;
+    using BScript.Language;
 
     public class NotExpression : IExpression
     {
@@ -20,8 +21,8 @@
         public object Evaluate(Context context)
         {
             object value = this.expression.Evaluate(context);
-
-            if (value == null || false.Equals(value))
+           
+            if (Predicates.IsFalse(value))
                 return true;
 
             return false;

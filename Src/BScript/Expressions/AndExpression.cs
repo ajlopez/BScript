@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using Microsoft.VisualBasic.CompilerServices;
+    using BScript.Language;
 
     public class AndExpression : IExpression
     {
@@ -25,12 +26,12 @@
         {
             object lvalue = this.left.Evaluate(context);
 
-            if (lvalue == null || false.Equals(lvalue))
+            if (Predicates.IsFalse(lvalue))
                 return false;
 
             object rvalue = this.right.Evaluate(context);
 
-            if (rvalue == null || false.Equals(rvalue))
+            if (Predicates.IsFalse(rvalue))
                 return false;
 
             return true;

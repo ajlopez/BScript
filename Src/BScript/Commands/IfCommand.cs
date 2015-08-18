@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using BScript.Expressions;
+    using BScript.Language;
 
     public class IfCommand : ICommand
     {
@@ -32,7 +33,7 @@
 
         public void Execute(Context context)
         {
-            if (IsFalse(this.condition.Evaluate(context)))
+            if (Predicates.IsFalse(this.condition.Evaluate(context)))
             {
                 if (this.elsecmd != null)
                     this.elsecmd.Execute(context);
@@ -40,11 +41,6 @@
             }
 
             this.thencmd.Execute(context);
-        }
-
-        private static bool IsFalse(object value)
-        {
-            return value == null || value.Equals(false);
         }
     }
 }

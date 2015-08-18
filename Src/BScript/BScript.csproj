@@ -72,6 +72,7 @@
     <Compile Include="Expressions\NameExpression.cs" />
     <Compile Include="Language\Function.cs" />
     <Compile Include="Language\IFunction.cs" />
+    <Compile Include="Language\Predicates.cs" />
     <Compile Include="Language\Print.cs" />
     <Compile Include="Machine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
