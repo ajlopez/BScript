@@ -28,20 +28,12 @@
             if (this.tokens.Count > 0)
                 return this.tokens.Pop();
 
-            char ch = ' ';
-
-            while (this.position < this.length) 
-            {
-                ch = this.text[this.position];
-
-                if (ch == '\r' || ch == '\n' || !char.IsWhiteSpace(ch))
-                    break;
-
-                this.position++;
-            }
+            this.SkipWhiteSpaces();
 
             if (this.position >= this.length)
                 return null;
+
+            char ch = this.text[this.position];
 
             if (this.position < this.length - 1 && operators2.Any(op => op[0] == ch))
             {
@@ -96,6 +88,21 @@
 
             throw new LexerException(string.Format("Unexpected '{0}'", ch));
        }
+
+        private void SkipWhiteSpaces()
+        {
+            char ch;
+
+            while (this.position < this.length)
+            {
+                ch = this.text[this.position];
+
+                if (ch == '\r' || ch == '\n' || !char.IsWhiteSpace(ch))
+                    break;
+
+                this.position++;
+            }
+        }
 
         public void PushToken(Token token)
         {
