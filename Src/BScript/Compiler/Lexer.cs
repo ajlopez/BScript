@@ -89,6 +89,11 @@
             throw new LexerException(string.Format("Unexpected '{0}'", ch));
        }
 
+        public void PushToken(Token token)
+        {
+            this.tokens.Push(token);
+        }
+
         private void SkipWhiteSpaces()
         {
             char ch;
@@ -97,16 +102,21 @@
             {
                 ch = this.text[this.position];
 
+                if (ch == '#')
+                {
+                    this.position++;
+
+                    while (this.position < this.length && this.text[this.position] != '\n')
+                        this.position++;
+
+                    continue;
+                }
+
                 if (ch == '\r' || ch == '\n' || !char.IsWhiteSpace(ch))
                     break;
 
                 this.position++;
             }
-        }
-
-        public void PushToken(Token token)
-        {
-            this.tokens.Push(token);
         }
 
         private Token NextName()

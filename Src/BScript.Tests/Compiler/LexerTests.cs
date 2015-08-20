@@ -107,7 +107,7 @@
         [TestMethod]
         public void GetUnexpectedToken()
         {
-            Lexer lexer = new Lexer("#r");
+            Lexer lexer = new Lexer("!r");
 
             try
             {
@@ -117,7 +117,7 @@
             catch (Exception e)
             {
                 Assert.IsInstanceOfType(e, typeof(LexerException));
-                Assert.AreEqual(e.Message, "Unexpected '#'");
+                Assert.AreEqual(e.Message, "Unexpected '!'");
             }
         }
 
@@ -307,6 +307,32 @@
             Assert.IsNotNull(token);
             Assert.AreEqual(TokenType.Name, token.Type);
             Assert.AreEqual("foo", token.Value);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void GetNameSkippingComments()
+        {
+            Lexer lexer = new Lexer("# this is a comment \n  foo # this is another comment\n   ");
+
+            var token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.EndOfLine, token.Type);
+            Assert.AreEqual("\n", token.Value);
+
+            token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.Name, token.Type);
+            Assert.AreEqual("foo", token.Value);
+
+            token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.EndOfLine, token.Type);
+            Assert.AreEqual("\n", token.Value);
 
             Assert.IsNull(lexer.NextToken());
         }
