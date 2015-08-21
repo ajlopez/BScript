@@ -314,7 +314,7 @@
         [TestMethod]
         public void GetNameSkippingComments()
         {
-            Lexer lexer = new Lexer("# this is a comment \n  foo # this is another comment\n   ");
+            Lexer lexer = new Lexer("# this is a comment \n  foo # this is another comment   ");
 
             var token = lexer.NextToken();
 
@@ -327,12 +327,6 @@
             Assert.IsNotNull(token);
             Assert.AreEqual(TokenType.Name, token.Type);
             Assert.AreEqual("foo", token.Value);
-
-            token = lexer.NextToken();
-
-            Assert.IsNotNull(token);
-            Assert.AreEqual(TokenType.EndOfLine, token.Type);
-            Assert.AreEqual("\n", token.Value);
 
             Assert.IsNull(lexer.NextToken());
         }
