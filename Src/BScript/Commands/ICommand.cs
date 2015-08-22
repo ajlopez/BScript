@@ -4,6 +4,6 @@
 
     public interface ICommand
     {
-        void Execute(BScript.Context context);
+        void Execute(Context context);
     }
 }

@@ -51,6 +51,7 @@
     <Compile Include="Commands\CompositeCommandTests.cs" />
     <Compile Include="Commands\FunctionCommandTests.cs" />
     <Compile Include="Commands\ForCommandTests.cs" />
+    <Compile Include="Commands\IncludeCommandTests.cs" />
     <Compile Include="Commands\ReturnCommandTests.cs" />
     <Compile Include="Commands\WhileCommandTests.cs" />
     <Compile Include="Commands\IfCommandTests.cs" />
