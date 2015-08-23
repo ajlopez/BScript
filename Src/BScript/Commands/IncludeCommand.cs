@@ -15,6 +15,8 @@
             this.expr = expr;
         }
 
+        public IExpression Expression { get { return this.expr; } }
+
         public void Execute(Context context)
         {
             string filename = (string)this.expr.Evaluate(context);

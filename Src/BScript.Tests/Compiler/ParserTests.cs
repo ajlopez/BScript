@@ -693,6 +693,25 @@
         }
 
         [TestMethod]
+        public void ParseIncludeCommand()
+        {
+            Parser parser = new Parser("include \"mycode\"");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IncludeCommand));
+
+            var icmd = (IncludeCommand)result;
+
+            Assert.IsNotNull(icmd.Expression);
+            Assert.IsInstanceOfType(icmd.Expression, typeof(ConstantExpression));
+            Assert.AreEqual("mycode", ((ConstantExpression)icmd.Expression).Value);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseFunctionWithCompositeCommand()
         {
             Parser parser = new Parser("function foo(a, b) \n a = a+b \n return a\n end");

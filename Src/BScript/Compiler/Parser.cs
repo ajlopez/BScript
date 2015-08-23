@@ -59,6 +59,8 @@
                     return this.ParseReturnCommand();
                 if (token.Value == "function")
                     return this.ParseFunctionCommand();
+                if (token.Value == "include")
+                    return this.ParseIncludeCommand();
             }
 
             this.lexer.PushToken(token);
@@ -192,6 +194,15 @@
                 return new ReturnCommand(null);
 
             ICommand cmd = new ReturnCommand(this.ParseExpression());
+
+            this.ParseEndOfCommand();
+
+            return cmd;
+        }
+
+        private ICommand ParseIncludeCommand()
+        {
+            ICommand cmd = new IncludeCommand(this.ParseExpression());
 
             this.ParseEndOfCommand();
 
