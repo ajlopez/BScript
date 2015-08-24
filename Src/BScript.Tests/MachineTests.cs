@@ -61,6 +61,17 @@
         }
 
         [TestMethod]
+        public void ExecuteFileInclude()
+        {
+            var machine = new Machine();
+
+            machine.ExecuteFile("Files\\Include.txt");
+
+            Assert.AreEqual(1, machine.RootContext.GetValue("a"));
+            Assert.AreEqual(2, machine.RootContext.GetValue("b"));
+        }
+
+        [TestMethod]
         public void ExecuteFileInvokeFunction()
         {
             var machine = new Machine();

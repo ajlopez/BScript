@@ -24,6 +24,8 @@
 
         public Context RootContext { get { return this.context; } }
 
+        public string CurrentFilePath { get; set; }
+
         public TextWriter Out 
         { 
             get 
@@ -46,8 +48,24 @@
 
         public static void ExecuteFile(string filename, Context context)
         {
+            Machine machine = (Machine)context.GetValue("machine");
+            string path = null;
+
+            if (machine != null)
+            {
+                path = machine.CurrentFilePath;
+
+                if (path != null)
+                    filename = Path.Combine(path, filename);
+
+                machine.CurrentFilePath = (new FileInfo(Path.GetFullPath(filename))).Directory.FullName;
+            }
+
             var code = File.ReadAllText(filename);
             Execute(code, context);
+
+            if (machine != null)
+                machine.CurrentFilePath = path;
         }
 
         public void Execute(string code)
